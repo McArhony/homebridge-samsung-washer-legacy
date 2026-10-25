@@ -1,0 +1,62 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.attributes.smartControl.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{smartControl.value}}",
+        "alternatives": [
+          {
+            "key": "on",
+            "value": "{{i18n.attributes.smartControl.i18n.value.on.label}}",
+            "type": "active"
+          },
+          {
+            "key": "off",
+            "value": "{{i18n.attributes.smartControl.i18n.value.off.label}}",
+            "type": "active"
+          },
+          {
+            "key": "washerOff",
+            "value": "{{i18n.attributes.smartControl.i18n.value.washerOff.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.attributes.smartControl.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "on",
+              "value": "{{i18n.attributes.smartControl.i18n.value.on.label}}",
+              "type": "active"
+            },
+            {
+              "key": "off",
+              "value": "{{i18n.attributes.smartControl.i18n.value.off.label}}",
+              "type": "active"
+            },
+            {
+              "key": "washerOff",
+              "value": "{{i18n.attributes.smartControl.i18n.value.washerOff.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "smartControl.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": []
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "tag": "de",
+  "label": "Smart Control",
+  "attributes": {
+    "smartControl": {
+      "label": "Smart Control",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "on": {
+            "label": "Ein"
+          },
+          "off": {
+            "label": "Aus — Änderungen abgelehnt"
+          },
+          "washerOff": {
+            "label": "Gerät aus"
+          }
+        }
+      }
+    }
+  }
+}

@@ -37,6 +37,7 @@ local childLockCap = capabilities[NS .. ".washerChildLock"]
 local statusCap = capabilities[NS .. ".washerStatus"]
 local cycleCap = capabilities[NS .. ".washerCycle"]
 local controlCap = capabilities[NS .. ".washerControl"]
+local smartControlCap = capabilities[NS .. ".washerSmartControl"]
 
 -- Machine values → capability values for the dispenser, alerts and child lock.
 local ON_OFF = { enable = "enabled", disable = "disabled", notused = "unavailable" }
@@ -286,6 +287,7 @@ local function emit_state(device, v)
 
   local smart = (v.WM_FUN_SMARTCONTROL or ""):lower() == "on"
   device:set_field("smart_control", smart)
+  emit_changed(device, "smartControl", smart and "on" or "off", smartControlCap.smartControl(smart and "on" or "off"))
   device:emit_event(remoteControlStatus.remoteControlEnabled(smart and "true" or "false"))
 
   emit_settings(device, v, state ~= "stop")
@@ -340,6 +342,7 @@ local function emit_off(device)
   -- Nothing can be controlled while the washer is off.
   device:set_field("smart_control", false)
   device:emit_event(remoteControlStatus.remoteControlEnabled("false"))
+  emit_changed(device, "smartControl", "washerOff", smartControlCap.smartControl("washerOff"))
   device:online()
 end
 

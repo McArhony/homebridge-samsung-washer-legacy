@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PROFILES_DIR = os.path.join(HERE, "..", "profiles")
 
 # Check boxes: (letter in the variant name, block shown when checked)
-BLOCKS = [("p", NS + ".washerCycle"), ("s", NS + ".washerStatus"), ("r", "remoteControlStatus")]
+BLOCKS = [("p", NS + ".washerCycle"), ("s", NS + ".washerStatus"), ("r", NS + ".washerSmartControl")]
 
 
 def variants():
@@ -42,12 +42,13 @@ SETTINGS = [NS + ".washerProgramme", NS + ".washerTemperature", NS + ".washerSpi
 # Every variant has every capability: only the screen differs.
 CAPABILITIES = ["washerOperatingState", NS + ".washerCycle", NS + ".washerControl", NS + ".washerRemainingTime",
                 NS + ".washerProgramme", NS + ".washerTemperature", NS + ".washerSpin", NS + ".washerRinse",
-                NS + ".washerStatus", "remoteControlStatus", NS + ".washerChildLock", NS + ".washerDispenser",
+                NS + ".washerStatus", NS + ".washerSmartControl", "remoteControlStatus", NS + ".washerChildLock", NS + ".washerDispenser",
                 NS + ".washerAlerts", "refresh"]
 
 AUTOMATION_CONDITIONS = ["washerOperatingState", NS + ".washerCycle", NS + ".washerRemainingTime", NS + ".washerStatus",
                          NS + ".washerProgramme", NS + ".washerTemperature", NS + ".washerSpin", NS + ".washerRinse",
-                         "remoteControlStatus", NS + ".washerChildLock", NS + ".washerDispenser", NS + ".washerAlerts"]
+                         NS + ".washerSmartControl", "remoteControlStatus", NS + ".washerChildLock", NS + ".washerDispenser",
+                         NS + ".washerAlerts"]
 AUTOMATION_ACTIONS = [NS + ".washerControl", "washerOperatingState", NS + ".washerProgramme", NS + ".washerTemperature",
                       NS + ".washerSpin", NS + ".washerRinse", NS + ".washerChildLock", NS + ".washerDispenser"]
 

@@ -26,7 +26,7 @@
     },
     {
       "component": "main",
-      "capability": "remoteControlStatus",
+      "capability": "perfectforest07855.washerSmartControl",
       "version": 1,
       "values": [],
       "patch": []
@@ -135,6 +135,14 @@
       {
         "component": "main",
         "capability": "perfectforest07855.washerRinse",
+        "version": 1,
+        "values": [],
+        "patch": [],
+        "exclusion": []
+      },
+      {
+        "component": "main",
+        "capability": "perfectforest07855.washerSmartControl",
         "version": 1,
         "values": [],
         "patch": [],

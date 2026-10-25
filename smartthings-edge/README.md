@@ -29,7 +29,9 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
 - Screen: the grey control card (standard `washerOperatingState`, its buttons follow the state),
   then the programme and settings. The iOS app puts read-only values in a card between the two;
   three check boxes (**Show progress** — "Rinse · 85% · 15 min" from `washerCycle` —, **Show
-  status** — the translated `washerStatus` line —, **Show Smart Control**) choose what goes there:
+  status** — the translated `washerStatus` line —, **Show Smart Control** — `washerSmartControl`, on /
+  off / washer off; the standard `remoteControlStatus` is kept off the screen because the iOS app
+  answers "Can't connect to device" when it is false) choose what goes there:
   the driver switches the device to the matching profile (8 combinations). The auto dispenser is set
   in the settings (`autoDetergent`, `autoSoftener`): a change stays pending until the washer is
   stopped with Smart Control on. `washerControl` (start / pause / cancel

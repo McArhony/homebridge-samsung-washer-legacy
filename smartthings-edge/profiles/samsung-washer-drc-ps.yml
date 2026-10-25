@@ -21,6 +21,8 @@ components:
         version: 1
       - id: perfectforest07855.washerStatus
         version: 1
+      - id: perfectforest07855.washerSmartControl
+        version: 1
       - id: remoteControlStatus
         version: 1
       - id: perfectforest07855.washerChildLock
@@ -35,7 +37,7 @@ components:
       - name: Washer
 metadata:
   ocfDeviceType: oic.d.washer
-  vid: 50c8790e-1f0b-3ca4-a6ad-cb3b69fc229b
+  vid: 26d9f68d-834e-3405-83ab-11ea83313be8
   mnmn: SmartThingsCommunity
 preferences:
   - name: showProgress

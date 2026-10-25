@@ -1,0 +1,23 @@
+{
+  "tag": "fr",
+  "label": "Smart Control",
+  "attributes": {
+    "smartControl": {
+      "label": "Smart Control",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "on": {
+            "label": "Activé"
+          },
+          "off": {
+            "label": "Désactivé — changements refusés"
+          },
+          "washerOff": {
+            "label": "Machine éteinte"
+          }
+        }
+      }
+    }
+  }
+}

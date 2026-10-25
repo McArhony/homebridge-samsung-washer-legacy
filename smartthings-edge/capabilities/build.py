@@ -218,6 +218,16 @@ MULTI = [
          ("filter", "Clean the filter", "Nettoyer le filtre", "Filter reinigen", "Limpiar el filtro", "Pulire il filtro"),
          ("drumClean", "Drum clean due", "Nettoyage du tambour à faire", "Trommelreinigung fällig", "Limpieza del tambor pendiente", "Pulizia cestello da fare"),
      ])]),
+    # Shown instead of the standard remoteControlStatus, which the iOS app treats
+    # as "device unavailable" when it is false.
+    ("washerSmartControl", "Washer Smart Control",
+     ["Smart Control", "Smart Control", "Smart Control", "Smart Control", "Smart Control"],
+     [("smartControl", ["Smart Control", "Smart Control", "Smart Control", "Smart Control", "Smart Control"], None, None, [
+         ("on", "On", "Activé", "Ein", "Activado", "Attivo"),
+         ("off", "Off — changes refused", "Désactivé — changements refusés", "Aus — Änderungen abgelehnt",
+          "Desactivado — cambios rechazados", "Disattivo — modifiche rifiutate"),
+         ("washerOff", "Washer off", "Machine éteinte", "Gerät aus", "Lavadora apagada", "Lavatrice spenta"),
+     ])]),
     ("washerChildLock", "Washer Child Lock",
      ["Child lock", "Sécurité enfant", "Kindersicherung", "Bloqueo infantil", "Blocco bambini"],
      [("childLock", ["Child lock", "Sécurité enfant", "Kindersicherung", "Bloqueo infantil", "Blocco bambini"], "setChildLock", ON_OFF[:2], ON_OFF[:2])]),
