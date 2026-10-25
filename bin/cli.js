@@ -266,7 +266,8 @@ async function cmdStatus(host, args, dir) {
   say(`Remaining   : ${s.remainingMinutes ?? '?'} min`);
   say(`Smart Ctrl  : ${remote === null ? '?' : remote ? 'on' : 'off'}`);
   say(`Child lock  : ${s.kidsLock ?? '?'}`);
-  if (args.raw) say(JSON.stringify(s.raw, null, 2));
+  // DUID = the washer's MAC address: hidden, since this output gets pasted in public issues.
+  if (args.raw) say(JSON.stringify({ ...s.raw, ...(s.raw.DUID ? { DUID: '<hidden>' } : {}) }, null, 2));
 }
 
 async function cmdState(host, args, dir, state) {

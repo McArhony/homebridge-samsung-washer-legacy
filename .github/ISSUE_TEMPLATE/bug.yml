@@ -1,0 +1,29 @@
+name: Bug report
+description: Something does not work as described
+body:
+  - type: dropdown
+    id: part
+    attributes:
+      label: Which part?
+      options:
+        - SmartThings driver
+        - samsung-washer tool
+        - Homebridge plugin
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Washer model
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (`smartthings edge:drivers:logcat`, Homebridge log, or tool output)
+      description: Remove tokens, IDs and IP addresses before pasting.
+      render: text

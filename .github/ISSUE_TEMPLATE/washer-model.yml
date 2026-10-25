@@ -1,0 +1,37 @@
+name: My washer model
+description: Report a Samsung washer (working or not) so it can be supported
+labels: ["washer model"]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Model number
+      description: Sticker inside the door or on the back, e.g. WW10H9400EW
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: What happens?
+      options:
+        - Works with the SmartThings driver
+        - Answers on port 2878 but something fails
+        - Answers on port 8888 (2016-2018 protocol)
+        - Not found on the network
+    validations:
+      required: true
+  - type: textarea
+    id: test
+    attributes:
+      label: Output of `node bin/cli.js test <ip>`
+      render: text
+  - type: textarea
+    id: status
+    attributes:
+      label: Output of `node bin/cli.js status <ip> --raw` (if paired)
+      description: Never paste your token or the secrets folder.
+      render: text
+  - type: textarea
+    id: programmes
+    attributes:
+      label: Programme names on the washer's screen, in order
