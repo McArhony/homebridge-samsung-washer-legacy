@@ -139,8 +139,9 @@ def remaining_capability():
 def remaining_presentation():
     return {
         "dashboard": {"states": [{"label": "{{remainingTimeStr.value}}"}], "actions": []},
+        # Tile: short status line ("Wash · 47%"); detail: the minutes left.
         "detailView": [{"label": "{{i18n.label}}", "displayType": "state",
-                        "state": {"label": "{{remainingTimeStr.value}}"}}],
+                        "state": {"label": "{{remainingTime.value}} {{remainingTime.unit}}"}}],
         "automation": {
             "conditions": [{"label": "{{i18n.label}}", "displayType": "numberField",
                             "numberField": {"value": "remainingTime.value", "valueType": "integer", "unit": "remainingTime.unit",

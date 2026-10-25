@@ -219,8 +219,9 @@ local function emit_state(device, v)
 
   local remaining = state == "stop" and 0 or left_now
   emit_changed(device, "remaining", remaining, remainingCap.remainingTime({ value = remaining, unit = "min" }))
-  -- One line for the tile: "Wash · 33% · 1:04" (the tile shows a single state;
-  -- this text cannot follow the phone's language, so it stays in English).
+  -- Short line for the tile, which cuts long text: "Wash · 33%" (it cannot
+  -- follow the phone's language, so it stays in English). The time left is in
+  -- the remaining time and end time of the detail screen.
   local text
   if state == "stop" then text = job == "finish" and "Finished" or "Stopped"
   elseif waiting then text = "Waiting to start"
@@ -229,7 +230,6 @@ local function emit_state(device, v)
     -- WM_FUN_OPERATION_PROGRESS is the cycle's progress in percent (1 when stopped).
     local percent = tonumber(v.WM_FUN_OPERATION_PROGRESS)
     if percent and percent > 1 and percent <= 100 then parts[#parts + 1] = string.format("%d%%", percent) end
-    parts[#parts + 1] = string.format("%d:%02d", remaining // 60, remaining % 60)
     text = table.concat(parts, " · ")
   end
   emit_changed(device, "remainingStr", text, remainingCap.remainingTimeStr(text))

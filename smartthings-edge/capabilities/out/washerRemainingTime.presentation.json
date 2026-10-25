@@ -12,7 +12,7 @@
       "label": "{{i18n.label}}",
       "displayType": "state",
       "state": {
-        "label": "{{remainingTimeStr.value}}"
+        "label": "{{remainingTime.value}} {{remainingTime.unit}}"
       }
     }
   ],
