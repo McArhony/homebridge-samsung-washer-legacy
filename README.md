@@ -53,6 +53,7 @@ their programme list will differ: please open an issue with the output of
 - [docs/protocol.md](docs/protocol.md): how the washer talks, programme and settings codes.
 - [HANDOVER.md](HANDOVER.md): project status and next steps, for contributors.
 - [CONTRIBUTING.md](CONTRIBUTING.md): how to help — reporting your washer model is the most useful.
+- Questions: [Discussions](https://github.com/McArhony/smartthings-samsung-drc-washer/discussions).
 - `smartthings-edge/`: the SmartThings driver ([developer notes](smartthings-edge/README.md)).
 - `index.js`, `lib/`, `bin/`: the Homebridge plugin and the `samsung-washer` tool (Node.js, no
   dependencies).

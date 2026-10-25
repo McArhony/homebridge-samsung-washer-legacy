@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or help
+    url: https://github.com/McArhony/smartthings-samsung-drc-washer/discussions
+    about: Does it work with my washer? How do I…? Ask in Discussions.

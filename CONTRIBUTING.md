@@ -3,6 +3,10 @@
 Thanks for helping! Everything is welcome: reports of other washer models, bug reports, fixes,
 translations, documentation.
 
+Questions ("does it work with my washer?", "how do I…?") go to
+[Discussions](https://github.com/McArhony/smartthings-samsung-drc-washer/discussions); issues are for
+washer model reports and bugs.
+
 ## Report your washer model (most useful)
 
 Only the WW10H9400EW has been checked. If you have another Samsung "Smart Control" washer, open
