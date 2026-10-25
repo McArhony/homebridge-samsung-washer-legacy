@@ -61,13 +61,6 @@
     },
     {
       "component": "main",
-      "capability": "perfectforest07855.washerDispenser",
-      "version": 1,
-      "values": [],
-      "patch": []
-    },
-    {
-      "component": "main",
       "capability": "refresh",
       "version": 1,
       "values": [],

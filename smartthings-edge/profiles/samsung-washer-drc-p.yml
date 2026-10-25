@@ -35,7 +35,7 @@ components:
       - name: Washer
 metadata:
   ocfDeviceType: oic.d.washer
-  vid: fc436927-7175-3b0f-adaf-6e1b6a0e96e5
+  vid: 9be95518-1208-3ba2-8276-f123d14199e3
   mnmn: SmartThingsCommunity
 preferences:
   - name: showProgress
@@ -54,6 +54,20 @@ preferences:
       default: false
   - name: showSmartControl
     title: "Show Smart Control"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
+  - name: autoDetergent
+    title: "Auto detergent"
+    description: "Applied when the washer is stopped with Smart Control on"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
+  - name: autoSoftener
+    title: "Auto softener"
+    description: "Applied when the washer is stopped with Smart Control on"
     required: false
     preferenceType: boolean
     definition:

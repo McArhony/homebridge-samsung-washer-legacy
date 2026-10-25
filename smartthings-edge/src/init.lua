@@ -274,6 +274,7 @@ local function emit_state(device, v)
   end
 
   local smart = (v.WM_FUN_SMARTCONTROL or ""):lower() == "on"
+  device:set_field("smart_control", smart)
   device:emit_event(remoteControlStatus.remoteControlEnabled(smart and "true" or "false"))
 
   emit_settings(device, v, state ~= "stop")
@@ -281,6 +282,7 @@ local function emit_state(device, v)
 end
 
 local refresh
+local apply_dispenser
 
 -- At most one network scan per half hour (a switched-off washer is not found anyway).
 local SCAN_EVERY_S = 1800
@@ -350,6 +352,7 @@ refresh = function(driver, device)
   device:set_field("failures", 0)
   device:online()
   emit_state(device, values)
+  apply_dispenser(driver, device)
 end
 
 local function schedule_poll(driver, device)
@@ -460,6 +463,33 @@ local function toggle_handler(attribute, what, allowed_during_cycle)
   end
 end
 
+-- Auto dispenser, set in the device settings: a change is kept pending and
+-- written once the washer is stopped with Smart Control on.
+local DISPENSER = {
+  { pref = "autoDetergent", attribute = "WM_FUN_AUTO_DETERGENT", what = "auto detergent" },
+  { pref = "autoSoftener", attribute = "WM_FUN_AUTO_SOFTENER", what = "auto softener" },
+}
+
+apply_dispenser = function(driver, device)
+  local washer = washer_for(device)
+  if not washer or device:get_field("machine_state") ~= "stop" or not device:get_field("smart_control") then return end
+  local wrote = false
+  for _, d in ipairs(DISPENSER) do
+    local pending = device:get_field("pending_" .. d.pref)
+    if pending ~= nil then
+      local ok, err = washer:control(d.attribute, pending and "Enable" or "Disable")
+      device:set_field("pending_" .. d.pref, nil, { persist = true })
+      if ok then
+        device.log.info(string.format("%s: %s", d.what, pending and "on" or "off"))
+        wrote = true
+      else
+        device.log.warn(string.format("%s refused (%s) — not used by this programme?", d.what, tostring(err)))
+      end
+    end
+  end
+  if wrote then device.thread:call_with_delay(2, function() refresh(driver, device) end) end
+end
+
 -- Check boxes "Show progress / status / Smart Control" → profile
 -- (capabilities/build_profiles.py): the iOS app shows read-only values between
 -- the controls and the settings, so each combination has its own screen.
@@ -491,6 +521,19 @@ local function info_changed(driver, device, event, args)
   local old = args.old_st_store.preferences or {}
   local new = device.preferences
   if new.pairNow and not old.pairNow then pair(driver, device) end
+  local dispenser_changed = false
+  for _, d in ipairs(DISPENSER) do
+    if new[d.pref] ~= old[d.pref] then
+      device:set_field("pending_" .. d.pref, new[d.pref] == true, { persist = true })
+      dispenser_changed = true
+    end
+  end
+  if dispenser_changed then
+    if device:get_field("machine_state") ~= "stop" or not device:get_field("smart_control") then
+      device.log.info("auto dispenser: kept until the washer is stopped with Smart Control on")
+    end
+    apply_dispenser(driver, device)
+  end
   if new.showProgress ~= old.showProgress or new.showStatus ~= old.showStatus
       or new.showSmartControl ~= old.showSmartControl then
     apply_info_card(device)

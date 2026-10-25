@@ -150,6 +150,10 @@ programme (nothing by default):
 The tile always shows the phase and progress ("Rinse · 85%"). Close and reopen the app to see a
 change. Everything hidden stays available in routines and automations.
 
+The **auto dispenser** (detergent and softener) is also in the settings. A change is applied as soon
+as the washer is stopped with Smart Control on (otherwise it waits). Settings only go from the app
+to the washer: a change made on the washer's screen does not update them.
+
 ## Every day
 
 1. Load the laundry, close the door, press **Smart Control**.

@@ -35,8 +35,9 @@ def variants():
 
 VARIANTS = variants()
 
+# The auto dispenser is set in the device settings (preferences), not on the screen.
 SETTINGS = [NS + ".washerProgramme", NS + ".washerTemperature", NS + ".washerSpin", NS + ".washerRinse",
-            NS + ".washerChildLock", NS + ".washerDispenser", "refresh"]
+            NS + ".washerChildLock", "refresh"]
 
 # Every variant has every capability: only the screen differs.
 CAPABILITIES = ["washerOperatingState", NS + ".washerCycle", NS + ".washerControl", NS + ".washerRemainingTime",
@@ -67,6 +68,20 @@ PREFERENCES = '''preferences:
       default: false
   - name: showSmartControl
     title: "Show Smart Control"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
+  - name: autoDetergent
+    title: "Auto detergent"
+    description: "Applied when the washer is stopped with Smart Control on"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
+  - name: autoSoftener
+    title: "Auto softener"
+    description: "Applied when the washer is stopped with Smart Control on"
     required: false
     preferenceType: boolean
     definition:

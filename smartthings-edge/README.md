@@ -30,7 +30,9 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
   then the programme and settings. The iOS app puts read-only values in a card between the two;
   three check boxes (**Show progress** — "Rinse · 85% · 15 min" from `washerCycle` —, **Show
   status** — the translated `washerStatus` line —, **Show Smart Control**) choose what goes there:
-  the driver switches the device to the matching profile (8 combinations). `washerControl` (start / pause / cancel
+  the driver switches the device to the matching profile (8 combinations). The auto dispenser is set
+  in the settings (`autoDetergent`, `autoSoftener`): a change stays pending until the washer is
+  stopped with Smart Control on. `washerControl` (start / pause / cancel
   without arguments) serves automations.
 - Custom capabilities, namespace `perfectforest07855`, translated (English default, French,
   German, Spanish, Italian): `washerProgramme`, `washerTemperature`, `washerSpin`, `washerRinse`
