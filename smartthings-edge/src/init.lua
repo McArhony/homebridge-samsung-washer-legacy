@@ -321,6 +321,9 @@ local function emit_off(device)
   emit_changed(device, "cycleText", line, cycleCap.status(line))
   emit_changed(device, "cycleState", "stop", cycleCap.machineState("stop"))
   emit_changed(device, "controlState", "stop", controlCap.machineState("stop"))
+  -- Nothing can be controlled while the washer is off.
+  device:set_field("smart_control", false)
+  device:emit_event(remoteControlStatus.remoteControlEnabled("false"))
   device:online()
 end
 
