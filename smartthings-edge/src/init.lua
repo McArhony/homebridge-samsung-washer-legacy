@@ -226,7 +226,11 @@ local function emit_state(device, v)
   local state = machine_state(v.WM_FUN_OPERATION)
   -- At the end the washer reports Start + "Finish" until it leaves the Wi-Fi.
   if job_state(v.WM_FUN_PROGRESS) == "finish" then state = "stop" end
-  emit_supported_states(device, state)
+  -- Nothing can be sent without Smart Control: lock the screen like a running cycle.
+  local smart = (v.WM_FUN_SMARTCONTROL or ""):lower() == "on"
+  device:set_field("smart_control", smart)
+  local locked = state ~= "stop" or not smart
+  emit_supported_states(device, smart and state or "off")
   device:set_field("machine_state", state)
   device:emit_event(washerOperatingState.machineState(state))
   local job = job_state(v.WM_FUN_PROGRESS)
@@ -285,12 +289,10 @@ local function emit_state(device, v)
     device:emit_event(washerOperatingState.completionTime(iso8601(finish)))
   end
 
-  local smart = (v.WM_FUN_SMARTCONTROL or ""):lower() == "on"
-  device:set_field("smart_control", smart)
   emit_changed(device, "smartControl", smart and "on" or "off", smartControlCap.smartControl(smart and "on" or "off"))
   device:emit_event(remoteControlStatus.remoteControlEnabled(smart and "true" or "false"))
 
-  emit_settings(device, v, state ~= "stop")
+  emit_settings(device, v, locked)
   emit_extras(device, v)
 end
 
@@ -415,6 +417,12 @@ local function set_machine_state(driver, device, command)
     refresh(driver, device)
     return
   end
+  -- Starting a programme also needs Smart Control (the washer refuses it otherwise).
+  if wanted == "run" and not device:get_field("smart_control") then
+    device.log.warn("start refused: turn Smart Control on at the washer")
+    refresh(driver, device)
+    return
+  end
   local value = OPERATION_VALUES[wanted]
   if not value then return end
   local ok, err = washer_for(device):control("WM_FUN_OPERATION", value)
@@ -440,6 +448,11 @@ end
 local function refuse_during_cycle(driver, device, what)
   if device:get_field("washer_off") then
     device.log.warn(what .. " refused: the washer is off")
+    refresh(driver, device)
+    return true
+  end
+  if not device:get_field("smart_control") then
+    device.log.warn(what .. " refused: turn Smart Control on at the washer")
     refresh(driver, device)
     return true
   end

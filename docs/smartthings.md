@@ -165,7 +165,8 @@ to the washer: a change made on the washer's screen does not update them.
 With Smart Control off, the washer is still shown but refuses changes. During a cycle, like on
 the washer itself, the programme, settings and auto dispenser are locked (cancel the cycle to
 change them); the child lock stays available. While the washer is off, it shows "Off", offers no
-action and refuses every change. After a full cycle, the washer shows "finished"
+action and refuses every change. The same when the washer is on but Smart Control is off: the lists
+keep only their current value and every command is refused, since the washer would reject it anyway. After a full cycle, the washer shows "finished"
 until the next wash.
 
 ## Optional: link with a Samsung dryer
