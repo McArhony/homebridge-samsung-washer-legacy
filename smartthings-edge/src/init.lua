@@ -211,10 +211,21 @@ local function emit_extras(device, v)
   emit_changed(device, "status", status, statusCap.status(status))
 end
 
+-- Actions offered by the control card: only what makes sense in each state.
+local SUPPORTED_STATES = { run = { "pause", "stop" }, pause = { "run", "stop" }, stop = { "run" }, off = {} }
+
+local function emit_supported_states(device, state)
+  local supported = SUPPORTED_STATES[state] or {}
+  emit_changed(device, "supportedStates", supported, washerOperatingState.supportedMachineStates(supported))
+end
+
 local function emit_state(device, v)
+  device:set_field("last_values", v, { persist = true })
+  device:set_field("washer_off", false)
   local state = machine_state(v.WM_FUN_OPERATION)
   -- At the end the washer reports Start + "Finish" until it leaves the Wi-Fi.
   if job_state(v.WM_FUN_PROGRESS) == "finish" then state = "stop" end
+  emit_supported_states(device, state)
   device:set_field("machine_state", state)
   device:emit_event(washerOperatingState.machineState(state))
   local job = job_state(v.WM_FUN_PROGRESS)
@@ -312,6 +323,11 @@ end
 -- device (the iOS app does not even open an offline device).
 local function emit_off(device)
   local finished = device:get_field("finished") == true
+  device:set_field("washer_off", true)
+  emit_supported_states(device, "off")
+  -- Settings lists keep only their current value: nothing to choose.
+  local last = device:get_field("last_values")
+  if last then emit_settings(device, last, true) end
   device:set_field("machine_state", "stop")
   device:emit_event(washerOperatingState.machineState("stop"))
   emit_changed(device, "job", finished and "finish" or "none", washerOperatingState.washerJobState(finished and "finish" or "none"))
@@ -391,6 +407,11 @@ end
 
 local function set_machine_state(driver, device, command)
   local wanted = command.args.state or command.args.value
+  if device:get_field("washer_off") then
+    device.log.warn("command refused: the washer is off")
+    refresh(driver, device)
+    return
+  end
   local value = OPERATION_VALUES[wanted]
   if not value then return end
   local ok, err = washer_for(device):control("WM_FUN_OPERATION", value)
@@ -414,6 +435,11 @@ end
 
 -- Programme, settings and dispenser can only change when the washer is stopped.
 local function refuse_during_cycle(driver, device, what)
+  if device:get_field("washer_off") then
+    device.log.warn(what .. " refused: the washer is off")
+    refresh(driver, device)
+    return true
+  end
   local state = device:get_field("machine_state")
   if state == nil or state == "stop" then return false end
   device.log.warn(string.format("%s refused: a cycle is %s; cancel it first", what, state == "pause" and "paused" or "running"))
@@ -453,6 +479,11 @@ end
 -- Dispenser and child lock: one attribute, "enabled" → Enable, "disabled" → Disable.
 local function toggle_handler(attribute, what, allowed_during_cycle)
   return function(driver, device, command)
+    if device:get_field("washer_off") then
+      device.log.warn(what .. " refused: the washer is off")
+      refresh(driver, device) -- puts the current value back in the app
+      return
+    end
     if not allowed_during_cycle and refuse_during_cycle(driver, device, what .. " change") then return end
     local value = command.args.value == "enabled" and "Enable" or "Disable"
     local washer, ok, err = washer_for(device), nil, "washer not found yet"
@@ -511,7 +542,6 @@ local function apply_info_card(device)
 end
 
 local function device_init(driver, device)
-  device:emit_event(washerOperatingState.supportedMachineStates({ "run", "pause", "stop" }))
   apply_info_card(device)
   refresh(driver, device)
   schedule_poll(driver, device)
