@@ -147,8 +147,10 @@ programme (nothing by default):
 - **Show status**: "All OK", or what needs attention ("Detergent tank low", "Clean the filter"…);
 - **Show Smart Control**.
 
-The tile always shows the phase and progress ("Rinse · 85%"). Close and reopen the app to see a
-change. Everything hidden stays available in routines and automations.
+The tile always shows the phase and progress ("Rinse · 85%"). The change is applied at once (the
+washer does not need to be on), but the app keeps the old screen until it is **fully closed**
+(swipe it away in the app switcher) and reopened; it may take a minute. Everything hidden stays
+available in routines and automations.
 
 The **auto dispenser** (detergent and softener) is also in the settings. A change is applied as soon
 as the washer is stopped with Smart Control on (otherwise it waits). Settings only go from the app
