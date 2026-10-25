@@ -1,0 +1,34 @@
+{
+  "tag": "fr",
+  "label": "Lave-linge",
+  "attributes": {
+    "machineState": {
+      "label": "Lave-linge",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "En marche"
+          },
+          "pause": {
+            "label": "En pause"
+          },
+          "stop": {
+            "label": "Arrêté"
+          }
+        }
+      }
+    }
+  },
+  "commands": {
+    "start": {
+      "label": "Démarrer"
+    },
+    "pause": {
+      "label": "Pause"
+    },
+    "cancel": {
+      "label": "Annuler le cycle"
+    }
+  }
+}

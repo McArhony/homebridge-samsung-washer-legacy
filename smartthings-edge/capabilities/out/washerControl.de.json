@@ -1,0 +1,34 @@
+{
+  "tag": "de",
+  "label": "Waschmaschine",
+  "attributes": {
+    "machineState": {
+      "label": "Waschmaschine",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "Läuft"
+          },
+          "pause": {
+            "label": "Pausiert"
+          },
+          "stop": {
+            "label": "Gestoppt"
+          }
+        }
+      }
+    }
+  },
+  "commands": {
+    "start": {
+      "label": "Starten"
+    },
+    "pause": {
+      "label": "Pause"
+    },
+    "cancel": {
+      "label": "Zyklus abbrechen"
+    }
+  }
+}

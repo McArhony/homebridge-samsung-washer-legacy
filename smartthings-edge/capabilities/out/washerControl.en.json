@@ -1,0 +1,34 @@
+{
+  "tag": "en",
+  "label": "Washer",
+  "attributes": {
+    "machineState": {
+      "label": "Washer",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "Running"
+          },
+          "pause": {
+            "label": "Paused"
+          },
+          "stop": {
+            "label": "Stopped"
+          }
+        }
+      }
+    }
+  },
+  "commands": {
+    "start": {
+      "label": "Start"
+    },
+    "pause": {
+      "label": "Pause"
+    },
+    "cancel": {
+      "label": "Cancel cycle"
+    }
+  }
+}

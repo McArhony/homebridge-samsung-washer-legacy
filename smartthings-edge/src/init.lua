@@ -35,6 +35,8 @@ local dispenserCap = capabilities[NS .. ".washerDispenser"]
 local alertsCap = capabilities[NS .. ".washerAlerts"]
 local childLockCap = capabilities[NS .. ".washerChildLock"]
 local statusCap = capabilities[NS .. ".washerStatus"]
+local cycleCap = capabilities[NS .. ".washerCycle"]
+local controlCap = capabilities[NS .. ".washerControl"]
 
 -- Machine values → capability values for the dispenser, alerts and child lock.
 local ON_OFF = { enable = "enabled", disable = "disabled", notused = "unavailable" }
@@ -248,6 +250,11 @@ local function emit_state(device, v)
     text = table.concat(parts, " · ")
   end
   emit_changed(device, "remainingStr", text, remainingCap.remainingTimeStr(text))
+  -- First block of the screen: the same line, plus the minutes left.
+  local cycle_text = (state ~= "stop" and not waiting) and string.format("%s · %d min", text, remaining) or text
+  emit_changed(device, "cycleText", cycle_text, cycleCap.status(cycle_text))
+  emit_changed(device, "cycleState", state, cycleCap.machineState(state))
+  emit_changed(device, "controlState", state, controlCap.machineState(state))
 
   -- End time: recomputed only when the remaining time or the state really
   -- changes, so it does not drift while the washer holds or pauses.
@@ -346,7 +353,7 @@ local function pair(driver, device)
 end
 
 local function set_machine_state(driver, device, command)
-  local wanted = command.args.state
+  local wanted = command.args.state or command.args.value
   local value = OPERATION_VALUES[wanted]
   if not value then return end
   local ok, err = washer_for(device):control("WM_FUN_OPERATION", value)
@@ -422,8 +429,32 @@ local function toggle_handler(attribute, what, allowed_during_cycle)
   end
 end
 
+-- "Information card" setting → profile (capabilities/build_profiles.py): the
+-- iOS app shows read-only values between the controls and the settings, so
+-- each variant shows a different set of them.
+local INFO_CARD_PROFILES = {
+  none = "samsung-washer-drc",
+  progress = "samsung-washer-drc-progress",
+  progressStatus = "samsung-washer-drc-progress-status",
+  all = "samsung-washer-drc-full",
+}
+
+local function apply_info_card(device)
+  local variant = device.preferences.infoCard or "none"
+  local profile = INFO_CARD_PROFILES[variant] or INFO_CARD_PROFILES.none
+  if device:get_field("profile") == profile then return end
+  local ok, err = pcall(function() device:try_update_metadata({ profile = profile }) end)
+  if ok then
+    device:set_field("profile", profile, { persist = true })
+    device.log.info("information card: " .. variant)
+  else
+    device.log.warn("cannot switch profile: " .. tostring(err))
+  end
+end
+
 local function device_init(driver, device)
   device:emit_event(washerOperatingState.supportedMachineStates({ "run", "pause", "stop" }))
+  apply_info_card(device)
   refresh(driver, device)
   schedule_poll(driver, device)
   if not token_for(device) then
@@ -435,6 +466,7 @@ local function info_changed(driver, device, event, args)
   local old = args.old_st_store.preferences or {}
   local new = device.preferences
   if new.pairNow and not old.pairNow then pair(driver, device) end
+  if new.infoCard ~= old.infoCard then apply_info_card(device) end
   if new.ipAddress ~= old.ipAddress or new.pollSeconds ~= old.pollSeconds then
     refresh(driver, device)
     schedule_poll(driver, device)
@@ -466,6 +498,14 @@ local driver = Driver("samsung-washer-legacy", {
     infoChanged = info_changed,
   },
   capability_handlers = {
+    [controlCap.ID] = {
+      [controlCap.commands.start.NAME] = function(d, dev) set_machine_state(d, dev, { args = { state = "run" } }) end,
+      [controlCap.commands.pause.NAME] = function(d, dev) set_machine_state(d, dev, { args = { state = "pause" } }) end,
+      [controlCap.commands.cancel.NAME] = function(d, dev) set_machine_state(d, dev, { args = { state = "stop" } }) end,
+    },
+    [cycleCap.ID] = {
+      [cycleCap.commands.setMachineState.NAME] = set_machine_state,
+    },
     [washerOperatingState.ID] = {
       [washerOperatingState.commands.setMachineState.NAME] = set_machine_state,
     },

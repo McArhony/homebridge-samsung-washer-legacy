@@ -1,0 +1,71 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.attributes.status.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{status.value}}"
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.attributes.machineState.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "run",
+              "value": "{{i18n.attributes.machineState.i18n.value.run.label}}",
+              "type": "active"
+            },
+            {
+              "key": "pause",
+              "value": "{{i18n.attributes.machineState.i18n.value.pause.label}}",
+              "type": "active"
+            },
+            {
+              "key": "stop",
+              "value": "{{i18n.attributes.machineState.i18n.value.stop.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "machineState.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "{{i18n.attributes.machineState.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "run",
+              "value": "{{i18n.attributes.machineState.i18n.value.run.label}}",
+              "type": "active"
+            },
+            {
+              "key": "pause",
+              "value": "{{i18n.attributes.machineState.i18n.value.pause.label}}",
+              "type": "active"
+            },
+            {
+              "key": "stop",
+              "value": "{{i18n.attributes.machineState.i18n.value.stop.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setMachineState",
+          "argumentType": "string"
+        }
+      }
+    ]
+  }
+}

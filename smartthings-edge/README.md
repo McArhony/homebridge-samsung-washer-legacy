@@ -13,9 +13,9 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
 | `src/course.lua` | programmes and settings of the WW10H9400EW, `WM_FUN_COURSE_OPTION` encoding |
 | `src/init.lua` | the SmartThings device |
 | `src/secrets/` | **git-ignored**: `ac14k_m.pem`, `ac14k_m.key` (`samsung-washer cert --dir src/secrets`), optional `token.lua` (`return "<token>"`) |
-| `profiles/samsung-washer-drc.yml` | capabilities and settings (optional IP address, polling interval, "Pair now") |
+| `profiles/samsung-washer-drc*.yml` | one profile per "Information card" choice; same capabilities and settings (information card, optional IP address, polling interval, "Pair now") |
 | `capabilities/build.py` | generates the custom capabilities, presentations and translations into `capabilities/out/` (single-value ones in `CAPABILITIES`, multi-attribute ones in `MULTI`) |
-| `capabilities/device-config.json` | device presentation: "Wash · 47%" on the tile. The iOS app always shows read-only values in a card above the controls, so that card is kept short (remaining time, one translated `washerStatus` line, Smart Control); dispenser levels and maintenance details stay available to automations |
+| `capabilities/build_profiles.py` | generates the four screen variants (`device-config-*.json`) and their profiles (`profiles/*.yml`, do not edit by hand); vids in `capabilities/vids.json` |
 | `rules/build_auto_cycle_link.py` | optional washer → dryer rule |
 | `test/` | `lua test/test_drc.lua && lua test/test_course.lua` |
 | `tools/live_read.lua` | real read from a computer (luasocket + luasec): `OPENSSL_CONF=tools/openssl-seclevel0.cnf lua tools/live_read.lua <ip> <secrets-folder>` |
@@ -26,6 +26,12 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
   `delayWash`, `finish`…), completion time. After a full cycle (a stop with ≤ 5 minutes left),
   `finish` stays until the next start.
 - `remoteControlStatus`: Smart Control on / off. `refresh`.
+- Screen: the grey control card (standard `washerOperatingState`, its buttons follow the state),
+  then the programme and settings. The iOS app puts read-only values in a card between the two;
+  the **"Information card"** setting chooses what goes there (nothing, progress "Rinse · 85% ·
+  15 min" from `washerCycle`, plus the translated `washerStatus` line, plus Smart Control): the
+  driver switches the device to the matching profile. `washerControl` (start / pause / cancel
+  without arguments) serves automations.
 - Custom capabilities, namespace `perfectforest07855`, translated (English default, French,
   German, Spanish, Italian): `washerProgramme`, `washerTemperature`, `washerSpin`, `washerRinse`
   (only the values the selected programme allows) and `washerRemainingTime` (read only, "1:23",
@@ -53,16 +59,16 @@ namespace. To use your own instead:
 ```sh
 python3 capabilities/build.py <your-namespace>      # writes capabilities/out/
 # for each capability: washerProgramme, washerTemperature, washerSpin, washerRinse, washerRemainingTime,
-#   washerDispenser, washerAlerts, washerChildLock
+#   washerDispenser, washerAlerts, washerChildLock, washerStatus, washerCycle, washerControl
 smartthings capabilities:create -i capabilities/out/<cap>.json          # first one creates your namespace
 smartthings capabilities:presentation:create -i capabilities/out/<cap>.presentation.json <ns>.<cap>
 smartthings capabilities:translations:upsert <ns>.<cap> -i capabilities/out/<cap>.<lang>.json   # en fr de es it
 ```
 
-Then replace `perfectforest07855` in `profiles/samsung-washer-drc.yml`, `src/init.lua` and
-`capabilities/device-config.json`, create the presentation with
-`smartthings presentation:device-config:create -i capabilities/device-config.json` and put the
-returned `vid` in the profile's `metadata`.
+Then replace `perfectforest07855` in `src/init.lua` and `capabilities/build_profiles.py`, run it,
+create each `capabilities/device-config-*.json` with
+`smartthings presentation:device-config:create -i …`, put the returned vids in
+`capabilities/vids.json` and run it again to write the profiles.
 
 ## Washer → dryer link (imitating Samsung's "Auto Cycle Link")
 

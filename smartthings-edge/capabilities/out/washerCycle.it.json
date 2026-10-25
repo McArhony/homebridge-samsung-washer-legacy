@@ -1,0 +1,27 @@
+{
+  "tag": "it",
+  "label": "Ciclo",
+  "attributes": {
+    "status": {
+      "label": "Avanzamento",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    },
+    "machineState": {
+      "label": "Lavatrice",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "In funzione"
+          },
+          "pause": {
+            "label": "In pausa"
+          },
+          "stop": {
+            "label": "Ferma"
+          }
+        }
+      }
+    }
+  }
+}

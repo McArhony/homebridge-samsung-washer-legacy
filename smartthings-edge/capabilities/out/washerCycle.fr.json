@@ -1,0 +1,27 @@
+{
+  "tag": "fr",
+  "label": "Cycle",
+  "attributes": {
+    "status": {
+      "label": "Avancement",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    },
+    "machineState": {
+      "label": "Lave-linge",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "En marche"
+          },
+          "pause": {
+            "label": "En pause"
+          },
+          "stop": {
+            "label": "Arrêté"
+          }
+        }
+      }
+    }
+  }
+}

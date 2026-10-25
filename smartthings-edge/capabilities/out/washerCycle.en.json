@@ -1,0 +1,27 @@
+{
+  "tag": "en",
+  "label": "Cycle",
+  "attributes": {
+    "status": {
+      "label": "Progress",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    },
+    "machineState": {
+      "label": "Washer",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "Running"
+          },
+          "pause": {
+            "label": "Paused"
+          },
+          "stop": {
+            "label": "Stopped"
+          }
+        }
+      }
+    }
+  }
+}

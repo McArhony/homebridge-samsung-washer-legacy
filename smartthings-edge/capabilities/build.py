@@ -189,6 +189,18 @@ MULTI = [
        [("ok", "No", "Non", "Nein", "No", "No"), ("alert", "Careful, hot", "Attention, chaude", "Vorsicht, heiß", "Cuidado, caliente", "Attenzione, caldo")]),
       ("dispenserFault", ["Dispenser fault", "Anomalie du distributeur", "Dosierstörung", "Fallo del dosificador", "Guasto dosatore"], None, None, ALERT),
       ("error", ["Error", "Erreur", "Fehler", "Error", "Errore"], None, None, None)]),
+    # Experimental first block of the screen, modelled on washerOperatingState (a
+    # state line, then setMachineState), with a richer line: "Rinse · 68% · 33 min".
+    ("washerCycle", "Washer Cycle",
+     ["Cycle", "Cycle", "Zyklus", "Ciclo", "Ciclo"],
+     [("status", ["Progress", "Avancement", "Fortschritt", "Progreso", "Avanzamento"], None, None, None),
+      ("machineState", ["Washer", "Lave-linge", "Waschmaschine", "Lavadora", "Lavatrice"], "setMachineState",
+       [("run", "Start", "Démarrer", "Starten", "Iniciar", "Avvia"),
+        ("pause", "Pause", "Pause", "Pause", "Pausa", "Pausa"),
+        ("stop", "Cancel", "Annuler", "Abbrechen", "Cancelar", "Annulla")],
+       [("run", "Running", "En marche", "Läuft", "En marcha", "In funzione"),
+        ("pause", "Paused", "En pause", "Pausiert", "En pausa", "In pausa"),
+        ("stop", "Stopped", "Arrêté", "Gestoppt", "Detenida", "Ferma")])]),
     # One translated line summing up what needs attention (the iOS app puts every
     # read-only value in a card above the controls: keep that card short).
     ("washerStatus", "Washer Status",
@@ -229,9 +241,10 @@ def multi_capability(name, fields):
 
 
 CONTROLS_ONLY_IN_DETAIL = {"washerDispenser"}
+STATES_ONLY_IN_DETAIL = {"washerCycle"}  # its buttons live in washerControl
 
 
-def multi_presentation(fields, controls_only=False):
+def multi_presentation(fields, controls_only=False, states_only=False):
     detail, conditions, actions = [], [], []
     for attr, _labels, setter, settable, values in fields:
         label = "{{i18n.attributes.%s.label}}" % attr
@@ -240,7 +253,11 @@ def multi_presentation(fields, controls_only=False):
                     for v in values]
             conditions.append({"label": label, "displayType": "list",
                                "list": {"alternatives": alts, "value": f"{attr}.value", "valueType": "string"}})
-        if setter:
+        if setter and states_only:
+            actions.append({"label": label, "displayType": "list", "list": {"alternatives": [
+                {"key": v[0], "value": "{{i18n.attributes.%s.i18n.value.%s.label}}" % (attr, v[0]), "type": "active"}
+                for v in settable], "command": setter, "argumentType": "string"}})
+        elif setter:
             cmd_alts = [{"key": v[0], "value": "{{i18n.attributes.%s.i18n.value.%s.label}}" % (attr, v[0]), "type": "active"}
                         for v in settable]
             detail.append({"label": label, "displayType": "list", "list": {
@@ -270,6 +287,58 @@ def multi_translation(lang_index, lang, cap_labels, fields):
     return {"tag": lang, "label": cap_labels[lang_index], "attributes": attrs}
 
 
+# Buttons: start / pause as a play-pause button, cancel as a push button. Such
+# display types need commands without arguments, hence this capability.
+CONTROL_LABELS = ["Washer", "Lave-linge", "Waschmaschine", "Lavadora", "Lavatrice"]
+CONTROL_STATES = [("run", "Running", "En marche", "Läuft", "En marcha", "In funzione"),
+                  ("pause", "Paused", "En pause", "Pausiert", "En pausa", "In pausa"),
+                  ("stop", "Stopped", "Arrêté", "Gestoppt", "Detenida", "Ferma")]
+CANCEL_LABELS = ["Cancel cycle", "Annuler le cycle", "Zyklus abbrechen", "Cancelar ciclo", "Annulla ciclo"]
+
+
+def control_capability():
+    return {
+        "name": "Washer Control",
+        "attributes": {"machineState": {"schema": {"type": "object", "properties": {
+            "value": {"type": "string", "enum": [v[0] for v in CONTROL_STATES]}},
+            "additionalProperties": False, "required": ["value"]}, "enumCommands": []}},
+        "commands": {c: {"name": c, "arguments": []} for c in ("start", "pause", "cancel")},
+    }
+
+
+def control_presentation():
+    alts = [{"key": v[0], "value": "{{i18n.attributes.machineState.i18n.value.%s.label}}" % v[0], "type": "active"}
+            for v in CONTROL_STATES]
+    return {
+        "dashboard": {"states": [], "actions": []},
+        "detailView": [
+            {"label": "{{i18n.label}}", "displayType": "playPause", "playPause": {
+                "command": {"play": "start", "pause": "pause"},
+                "state": {"value": "machineState.value", "valueType": "string", "play": "run", "pause": "pause",
+                          "alternatives": alts}}},
+            {"label": "{{i18n.commands.cancel.label}}", "displayType": "pushButton", "pushButton": {"command": "cancel"}},
+        ],
+        "automation": {
+            "conditions": [{"label": "{{i18n.label}}", "displayType": "list",
+                            "list": {"alternatives": alts, "value": "machineState.value", "valueType": "string"}}],
+            "actions": [{"label": "{{i18n.label}}", "displayType": "list", "list": {"alternatives": [
+                {"key": "start", "value": "{{i18n.commands.start.label}}", "type": "active"},
+                {"key": "pause", "value": "{{i18n.commands.pause.label}}", "type": "active"},
+                {"key": "cancel", "value": "{{i18n.commands.cancel.label}}", "type": "active"}]}}],
+        },
+    }
+
+
+def control_translation(i, lang):
+    return {"tag": lang, "label": CONTROL_LABELS[i], "attributes": {"machineState": {
+        "label": CONTROL_LABELS[i], "displayTemplate": "{{device.label}}: {{value}}",
+        "i18n": {"value": {v[0]: {"label": v[1 + i]} for v in CONTROL_STATES}}}},
+        "commands": {
+            "start": {"label": ["Start", "Démarrer", "Starten", "Iniciar", "Avvia"][i]},
+            "pause": {"label": ["Pause", "Pause", "Pause", "Pausa", "Pausa"][i]},
+            "cancel": {"label": CANCEL_LABELS[i]}}}
+
+
 def main():
     namespace = sys.argv[1] if len(sys.argv) > 1 else "<namespace>"
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out")
@@ -293,11 +362,18 @@ def main():
         with open(os.path.join(out, f"{key}.json"), "w", encoding="utf-8") as f:
             json.dump(multi_capability(name, fields), f, indent=2, ensure_ascii=False)
         with open(os.path.join(out, f"{key}.presentation.json"), "w", encoding="utf-8") as f:
-            json.dump(multi_presentation(fields, key in CONTROLS_ONLY_IN_DETAIL), f, indent=2, ensure_ascii=False)
+            json.dump(multi_presentation(fields, key in CONTROLS_ONLY_IN_DETAIL, key in STATES_ONLY_IN_DETAIL), f, indent=2, ensure_ascii=False)
         for i, lang in enumerate(LANGS):
             with open(os.path.join(out, f"{key}.{lang}.json"), "w", encoding="utf-8") as f:
                 json.dump(multi_translation(i, lang, cap_labels, fields), f, indent=2, ensure_ascii=False)
-    print(f"{len(CAPABILITIES) + 1 + len(MULTI)} capabilities generated in {out} (namespace {namespace})")
+    with open(os.path.join(out, "washerControl.json"), "w", encoding="utf-8") as f:
+        json.dump(control_capability(), f, indent=2, ensure_ascii=False)
+    with open(os.path.join(out, "washerControl.presentation.json"), "w", encoding="utf-8") as f:
+        json.dump(control_presentation(), f, indent=2, ensure_ascii=False)
+    for i, lang in enumerate(LANGS):
+        with open(os.path.join(out, f"washerControl.{lang}.json"), "w", encoding="utf-8") as f:
+            json.dump(control_translation(i, lang), f, indent=2, ensure_ascii=False)
+    print(f"{len(CAPABILITIES) + 2 + len(MULTI)} capabilities generated in {out} (namespace {namespace})")
 
 
 if __name__ == "__main__":

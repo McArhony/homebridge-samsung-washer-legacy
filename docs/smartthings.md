@@ -138,6 +138,13 @@ appears. It shows as offline until you pair it.
 A few seconds later the washer comes online and shows its state. (You can turn "Pair now" back
 off.) If nothing happens, turn "Pair now" off and on again and repeat.
 
+## Choose what the screen shows
+
+In the washer's **⋮ → Settings → Information card**, choose what appears between the controls
+and the programme: nothing (default), the progress ("Rinse · 85% · 15 min"), the progress and a
+status line ("All OK", "Detergent tank low", "Clean the filter"…), or also Smart Control. The tile
+always shows the phase and progress ("Rinse · 85%"). Close and reopen the app to see a change.
+
 ## Every day
 
 1. Load the laundry, close the door, press **Smart Control**.

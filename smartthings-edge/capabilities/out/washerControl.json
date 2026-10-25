@@ -1,0 +1,39 @@
+{
+  "name": "Washer Control",
+  "attributes": {
+    "machineState": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "run",
+              "pause",
+              "stop"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": []
+    }
+  },
+  "commands": {
+    "start": {
+      "name": "start",
+      "arguments": []
+    },
+    "pause": {
+      "name": "pause",
+      "arguments": []
+    },
+    "cancel": {
+      "name": "cancel",
+      "arguments": []
+    }
+  }
+}

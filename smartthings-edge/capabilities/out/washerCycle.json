@@ -1,0 +1,60 @@
+{
+  "name": "Washer Cycle",
+  "attributes": {
+    "status": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": []
+    },
+    "machineState": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "run",
+              "pause",
+              "stop"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": [],
+      "setter": "setMachineState"
+    }
+  },
+  "commands": {
+    "setMachineState": {
+      "name": "setMachineState",
+      "arguments": [
+        {
+          "name": "value",
+          "optional": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "run",
+              "pause",
+              "stop"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

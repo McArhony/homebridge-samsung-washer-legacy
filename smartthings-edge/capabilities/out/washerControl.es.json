@@ -1,0 +1,34 @@
+{
+  "tag": "es",
+  "label": "Lavadora",
+  "attributes": {
+    "machineState": {
+      "label": "Lavadora",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "En marcha"
+          },
+          "pause": {
+            "label": "En pausa"
+          },
+          "stop": {
+            "label": "Detenida"
+          }
+        }
+      }
+    }
+  },
+  "commands": {
+    "start": {
+      "label": "Iniciar"
+    },
+    "pause": {
+      "label": "Pausa"
+    },
+    "cancel": {
+      "label": "Cancelar ciclo"
+    }
+  }
+}

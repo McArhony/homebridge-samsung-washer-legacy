@@ -6,9 +6,10 @@
         "component": "main",
         "capability": "perfectforest07855.washerRemainingTime",
         "version": 1,
+        "values": [],
+        "patch": [],
         "idx": 0,
         "group": "main",
-        "values": [],
         "composite": false
       }
     ],
@@ -25,7 +26,7 @@
     },
     {
       "component": "main",
-      "capability": "perfectforest07855.washerRemainingTime",
+      "capability": "perfectforest07855.washerCycle",
       "version": 1,
       "values": [],
       "patch": []
@@ -99,6 +100,14 @@
       {
         "component": "main",
         "capability": "washerOperatingState",
+        "version": 1,
+        "values": [],
+        "patch": [],
+        "exclusion": []
+      },
+      {
+        "component": "main",
+        "capability": "perfectforest07855.washerCycle",
         "version": 1,
         "values": [],
         "patch": [],
@@ -186,6 +195,14 @@
       }
     ],
     "actions": [
+      {
+        "component": "main",
+        "capability": "perfectforest07855.washerControl",
+        "version": 1,
+        "values": [],
+        "patch": [],
+        "exclusion": []
+      },
       {
         "component": "main",
         "capability": "washerOperatingState",

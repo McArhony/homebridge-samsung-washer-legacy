@@ -1,0 +1,27 @@
+{
+  "tag": "es",
+  "label": "Ciclo",
+  "attributes": {
+    "status": {
+      "label": "Progreso",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    },
+    "machineState": {
+      "label": "Lavadora",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "En marcha"
+          },
+          "pause": {
+            "label": "En pausa"
+          },
+          "stop": {
+            "label": "Detenida"
+          }
+        }
+      }
+    }
+  }
+}

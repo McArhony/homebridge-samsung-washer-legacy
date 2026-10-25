@@ -1,0 +1,34 @@
+{
+  "tag": "it",
+  "label": "Lavatrice",
+  "attributes": {
+    "machineState": {
+      "label": "Lavatrice",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "run": {
+            "label": "In funzione"
+          },
+          "pause": {
+            "label": "In pausa"
+          },
+          "stop": {
+            "label": "Ferma"
+          }
+        }
+      }
+    }
+  },
+  "commands": {
+    "start": {
+      "label": "Avvia"
+    },
+    "pause": {
+      "label": "Pausa"
+    },
+    "cancel": {
+      "label": "Annulla ciclo"
+    }
+  }
+}
