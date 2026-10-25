@@ -81,11 +81,16 @@ local function token_for(device)
   return device:get_field("token") or packaged_token()
 end
 
+-- Address typed in the settings (an empty setting reads as "null"), if any.
+local function ip_from_settings(device)
+  local ip = device.preferences.ipAddress
+  if type(ip) == "string" and ip:match("^%d+%.%d+%.%d+%.%d+$") then return ip end
+  return nil
+end
+
 -- Address set in the settings, else the one found by discovery.
 local function washer_ip(device)
-  local ip = device.preferences.ipAddress
-  if ip and ip:match("^%d+%.%d+%.%d+%.%d+$") then return ip end
-  return device:get_field("ip")
+  return ip_from_settings(device) or device:get_field("ip")
 end
 
 local function washer_for(device)
@@ -277,8 +282,14 @@ end
 
 local refresh
 
+-- At most one network scan per half hour (a switched-off washer is not found anyway).
+local SCAN_EVERY_S = 1800
+
 local function find_washer(driver, device)
   if device:get_field("scanning") then return end
+  local last = device:get_field("last_scan")
+  if last and os.time() - last < SCAN_EVERY_S then return end
+  device:set_field("last_scan", os.time())
   device:set_field("scanning", true)
   cosock.spawn(function()
     local ok, ip = pcall(discovery.find, driver, CERT, KEY)
@@ -295,10 +306,26 @@ local function find_washer(driver, device)
   end, "discovery " .. device.id)
 end
 
+-- A switched-off washer leaves the Wi-Fi: show it as off, not as a broken
+-- device (the iOS app does not even open an offline device).
+local function emit_off(device)
+  local finished = device:get_field("finished") == true
+  device:set_field("machine_state", "stop")
+  device:emit_event(washerOperatingState.machineState("stop"))
+  emit_changed(device, "job", finished and "finish" or "none", washerOperatingState.washerJobState(finished and "finish" or "none"))
+  local text = finished and "Finished" or "Off"
+  emit_changed(device, "remainingStr", text, remainingCap.remainingTimeStr(text))
+  local line = finished and "Finished — washer now off" or "Off — switched off or not on the network"
+  emit_changed(device, "cycleText", line, cycleCap.status(line))
+  emit_changed(device, "cycleState", "stop", cycleCap.machineState("stop"))
+  emit_changed(device, "controlState", "stop", controlCap.machineState("stop"))
+  device:online()
+end
+
 refresh = function(driver, device)
   local washer = washer_for(device)
   if not washer then
-    device:offline()
+    emit_off(device)
     find_washer(driver, device)
     return
   end
@@ -306,16 +333,18 @@ refresh = function(driver, device)
   if not values then
     local failures = (device:get_field("failures") or 0) + 1
     device:set_field("failures", failures)
-    if failures >= RESCAN_AFTER_FAILURES and not device.preferences.ipAddress then
+    if failures >= RESCAN_AFTER_FAILURES and not ip_from_settings(device) then
       device:set_field("failures", 0)
       find_washer(driver, device)
     end
     if err and err:match("^auth") then
+      -- A real problem: the token is refused.
       device.log.warn("access refused: " .. err .. " — turn on \"Pair now\" in the device settings")
+      device:offline()
     else
-      device.log.info("washer unreachable: " .. tostring(err))
+      device.log.info("washer unreachable (switched off?): " .. tostring(err))
+      emit_off(device)
     end
-    device:offline()
     return
   end
   device:set_field("failures", 0)

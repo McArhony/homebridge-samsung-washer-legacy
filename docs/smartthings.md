@@ -181,7 +181,8 @@ device and its settings are kept.
 | `test`: port closed | Wrong address, or the washer left the Wi-Fi (switch it on, Smart Control on) |
 | `test` answers on 8888 but not 2878 | Newer washer (2016-2018): not supported by the SmartThings driver yet |
 | "Scan nearby" finds nothing | Washer off or Smart Control off; hub and washer on different networks; try again after a minute |
-| Washer offline in the app | Washer switched off (normal), or its address changed (the driver looks for it again after a few minutes); you can also type its address in the device settings |
+| Washer shows "Off" | Normal when it is switched off: these washers leave the Wi-Fi a few minutes after a cycle. If it is on with Smart Control on, its address may have changed: the driver looks for it again (at most every 30 minutes), or type its address in the device settings |
+| "Can't connect to device" | The device is offline: the token was refused — turn on "Pair now" and pair again |
 | Pairing does nothing | Smart Control must go **off then on** while "Pair now" is active; child lock off; door closed |
 | Changes refused | Smart Control is off at the washer |
 | Programme names look wrong | Your model has other programmes: open an issue with `node bin/cli.js status <ip> --raw` |
