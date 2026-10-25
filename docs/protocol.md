@@ -70,6 +70,18 @@ The washer publishes 42 attributes in all; anything not in its `DeviceState` lis
 intensive, pre-wash, soak…) is not available on the network.
 
 A delayed end armed on the panel shows as `WM_FUN_OPERATION=Start` + `WM_FUN_PROGRESS=Delaywash`.
+
+**Held start.** Once, a remote `Start` from `Stop` with Smart Control on was accepted (the
+screen showed the programme as started, with Pause and Cancel) but the washer did not wash:
+`WM_FUN_OPERATION=Start`, `WM_FUN_PROGRESS=NULL`, `WM_FUN_OTLEFT` frozen at the programme's
+length, no error, for more than 25 minutes. Turning Smart Control off at the washer released it
+at once (`WM_FUN_PROGRESS=Wash`). The same remote start had worked instantly the evening before
+(another programme), and a remote resume after a pause with Smart Control on works instantly:
+the condition is not understood yet. Washing always shows a phase; `Start` without a phase means
+waiting.
+
+`WM_FUN_OPERATION_PROGRESS` moves during a cycle (1 when stopped, then 4, 5…): probably the
+cycle's step; to be mapped on a full cycle.
 Not seen yet: the phase name at the very end of a cycle.
 
 ### Programme and settings: `WM_FUN_COURSE_OPTION`

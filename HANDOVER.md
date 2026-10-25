@@ -37,7 +37,10 @@ git-ignored.
 ## Next steps
 
 1. **Watch a full wash** on the SmartThings driver: remaining time going down, final phase name,
-   "finished", then the dryer rule.
+   "finished", `WM_FUN_OPERATION_PROGRESS` steps, then the dryer rule.
+1b. **Understand the held start** ([docs/protocol.md](docs/protocol.md), "Held start"): a remote
+   start from stop, Smart Control on, was once held until Smart Control was turned off. The driver
+   now shows "waiting…" in that case.
 2. **Confirm discovery and in-app pairing** on a fresh install (follow the guide from scratch).
 3. **One-click install for everyone**: a public SmartThings channel with an invite link, so users
    skip the command line steps. It requires shipping Samsung's AC14K_M certificate and key inside

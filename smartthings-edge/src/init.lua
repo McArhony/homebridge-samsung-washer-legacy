@@ -46,6 +46,8 @@ local function alert(v) return lower(v) == "on" and "alert" or "ok" end
 -- A stop counts as the end of a cycle only when it was nearly over, not a
 -- cancel or a Wi-Fi drop; "finish" then stays until the next start.
 local END_THRESHOLD_MIN = 5
+-- "Start" without any phase for this long counts as waiting, not washing.
+local WAITING_AFTER_S = 60
 
 -- WM_FUN_PROGRESS → washerJobState
 local JOB_STATES = {
@@ -183,28 +185,45 @@ local function emit_state(device, v)
   device:emit_event(washerOperatingState.machineState(state))
   local job = job_state(v.WM_FUN_PROGRESS)
   if job == "none" and v.WM_FUN_PROGRESS and v.WM_FUN_PROGRESS ~= "NULL" then
-    log.info(string.format("phase inconnue : %s", v.WM_FUN_PROGRESS))
+    log.info(string.format("unknown phase: %s", v.WM_FUN_PROGRESS))
   end
   local left_now = tonumber(v.WM_FUN_OTLEFT) or 0
   job = track_finish(device, state, job, left_now)
   emit_changed(device, "job", job, washerOperatingState.washerJobState(job))
 
+  -- Started but not washing (seen with Smart Control on: the washer holds a
+  -- remote start without any phase until Smart Control is turned off).
+  local waiting = false
+  if state == "run" and (v.WM_FUN_PROGRESS == nil or v.WM_FUN_PROGRESS == "NULL") then
+    local since = device:get_field("waiting_since") or os.time()
+    device:set_field("waiting_since", since)
+    waiting = os.time() - since >= WAITING_AFTER_S
+    if waiting and not device:get_field("waiting_logged") then
+      device:set_field("waiting_logged", true)
+      device.log.warn("started but not washing: check the washer's screen (turning Smart Control off releases it)")
+    end
+  else
+    device:set_field("waiting_since", nil)
+    device:set_field("waiting_logged", nil)
+  end
+
   local remaining = state == "stop" and 0 or left_now
   emit_changed(device, "remaining", remaining, remainingCap.remainingTime({ value = remaining, unit = "min" }))
-  local text = state == "stop" and (job == "finish" and "0:00" or "--:--")
-    or string.format("%d:%02d", remaining // 60, remaining % 60)
+  local text
+  if state == "stop" then text = job == "finish" and "0:00" or "--:--"
+  elseif waiting then text = "waiting…"
+  else text = string.format("%d:%02d", remaining // 60, remaining % 60) end
   emit_changed(device, "remainingStr", text, remainingCap.remainingTimeStr(text))
 
-  -- Completion time moves by a minute at each poll: only emit real changes.
-  local left = tonumber(v.WM_FUN_OTLEFT)
-  local finish = os.time()
-  if state ~= "stop" and left then finish = finish + left * 60 end
-  local last = device:get_field("finish") or 0
-  if math.abs(finish - last) >= 120 or (state == "stop") ~= (device:get_field("stopped") == true) then
-    device:set_field("finish", finish)
+  -- End time: recomputed only when the remaining time or the state really
+  -- changes, so it does not drift while the washer holds or pauses.
+  local key = string.format("%s/%s/%s", state, tostring(remaining), tostring(waiting))
+  if key ~= device:get_field("finish_key") then
+    device:set_field("finish_key", key)
+    local finish = os.time()
+    if state == "run" and not waiting then finish = finish + remaining * 60 end
     device:emit_event(washerOperatingState.completionTime(iso8601(finish)))
   end
-  device:set_field("stopped", state == "stop")
 
   local smart = (v.WM_FUN_SMARTCONTROL or ""):lower() == "on"
   device:emit_event(remoteControlStatus.remoteControlEnabled(smart and "true" or "false"))
