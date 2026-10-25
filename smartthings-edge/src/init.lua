@@ -49,6 +49,13 @@ local END_THRESHOLD_MIN = 5
 -- "Start" without any phase for this long counts as waiting, not washing.
 local WAITING_AFTER_S = 60
 
+-- washerJobState → word shown on the tile
+local TILE_PHASES = {
+  weightSensing = "Weighing", preWash = "Pre-wash", wash = "Wash", rinse = "Rinse", spin = "Spin",
+  drying = "Drying", cooling = "Cooling", airWash = "Air wash", wrinklePrevent = "Anti-crease",
+  delayWash = "Delayed start", finish = "Finished",
+}
+
 -- WM_FUN_PROGRESS → washerJobState
 local JOB_STATES = {
   weightsensing = "weightSensing", prewash = "preWash", wash = "wash", rinse = "rinse",
@@ -212,10 +219,19 @@ local function emit_state(device, v)
 
   local remaining = state == "stop" and 0 or left_now
   emit_changed(device, "remaining", remaining, remainingCap.remainingTime({ value = remaining, unit = "min" }))
+  -- One line for the tile: "Wash · 33% · 1:04" (the tile shows a single state;
+  -- this text cannot follow the phone's language, so it stays in English).
   local text
-  if state == "stop" then text = job == "finish" and "0:00" or "--:--"
-  elseif waiting then text = "waiting…"
-  else text = string.format("%d:%02d", remaining // 60, remaining % 60) end
+  if state == "stop" then text = job == "finish" and "Finished" or "Stopped"
+  elseif waiting then text = "Waiting to start"
+  else
+    local parts = { state == "pause" and "Paused" or (TILE_PHASES[job] or "Running") }
+    -- WM_FUN_OPERATION_PROGRESS is the cycle's progress in percent (1 when stopped).
+    local percent = tonumber(v.WM_FUN_OPERATION_PROGRESS)
+    if percent and percent > 1 and percent <= 100 then parts[#parts + 1] = string.format("%d%%", percent) end
+    parts[#parts + 1] = string.format("%d:%02d", remaining // 60, remaining % 60)
+    text = table.concat(parts, " · ")
+  end
   emit_changed(device, "remainingStr", text, remainingCap.remainingTimeStr(text))
 
   -- End time: recomputed only when the remaining time or the state really

@@ -15,7 +15,7 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
 | `src/secrets/` | **git-ignored**: `ac14k_m.pem`, `ac14k_m.key` (`samsung-washer cert --dir src/secrets`), optional `token.lua` (`return "<token>"`) |
 | `profiles/samsung-washer-drc.yml` | capabilities and settings (optional IP address, polling interval, "Pair now") |
 | `capabilities/build.py` | generates the custom capabilities, presentations and translations into `capabilities/out/` (single-value ones in `CAPABILITIES`, multi-attribute ones in `MULTI`) |
-| `capabilities/device-config.json` | device presentation: state and remaining time on the tile, no button |
+| `capabilities/device-config.json` | device presentation: one line on the tile ("Wash · 47% · 0:51"), then controls and programme first, options and maintenance last |
 | `rules/build_auto_cycle_link.py` | optional washer → dryer rule |
 | `test/` | `lua test/test_drc.lua && lua test/test_course.lua` |
 | `tools/live_read.lua` | real read from a computer (luasocket + luasec): `OPENSSL_CONF=tools/openssl-seclevel0.cnf lua tools/live_read.lua <ip> <secrets-folder>` |

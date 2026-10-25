@@ -84,8 +84,8 @@ waiting.
 rinse count was changed mid-cycle). The SmartThings driver refuses them, like the washer's own
 screen does, until the cycle is cancelled.
 
-`WM_FUN_OPERATION_PROGRESS` moves during a cycle (1 when stopped, then 4, 5…): probably the
-cycle's step; to be mapped on a full cycle.
+`WM_FUN_OPERATION_PROGRESS` is the cycle's **progress in percent** (1 when stopped; e.g. 33 with
+64 of about 95 minutes left). The light key of the washer changes no attribute at all.
 Not seen yet: the phase name at the very end of a cycle.
 
 ### Programme and settings: `WM_FUN_COURSE_OPTION`
