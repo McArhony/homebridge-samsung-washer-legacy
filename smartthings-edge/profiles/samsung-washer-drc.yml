@@ -38,18 +38,26 @@ metadata:
   vid: 9f665502-f721-39ae-850a-ab2c636ec3f7
   mnmn: SmartThingsCommunity
 preferences:
-  - name: infoCard
-    title: "Information card"
-    description: "What to show between the controls and the programme"
+  - name: showProgress
+    title: "Show progress"
+    description: "Phase, progress and minutes left, above the programme"
     required: false
-    preferenceType: enumeration
+    preferenceType: boolean
     definition:
-      options:
-        none: "Hidden"
-        progress: "Progress"
-        progressStatus: "Progress and status"
-        all: "Progress, status and Smart Control"
-      default: none
+      default: false
+  - name: showStatus
+    title: "Show status"
+    description: "What needs attention (tanks, filter, drum clean, errors)"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
+  - name: showSmartControl
+    title: "Show Smart Control"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
   - name: ipAddress
     title: "Washer IP address (optional)"
     description: "Leave empty: the washer is found automatically"

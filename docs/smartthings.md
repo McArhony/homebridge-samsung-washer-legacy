@@ -140,10 +140,15 @@ off.) If nothing happens, turn "Pair now" off and on again and repeat.
 
 ## Choose what the screen shows
 
-In the washer's **⋮ → Settings → Information card**, choose what appears between the controls
-and the programme: nothing (default), the progress ("Rinse · 85% · 15 min"), the progress and a
-status line ("All OK", "Detergent tank low", "Clean the filter"…), or also Smart Control. The tile
-always shows the phase and progress ("Rinse · 85%"). Close and reopen the app to see a change.
+In the washer's **⋮ → Settings**, tick what you want to see between the controls and the
+programme (nothing by default):
+
+- **Show progress**: "Rinse · 85% · 15 min";
+- **Show status**: "All OK", or what needs attention ("Detergent tank low", "Clean the filter"…);
+- **Show Smart Control**.
+
+The tile always shows the phase and progress ("Rinse · 85%"). Close and reopen the app to see a
+change. Everything hidden stays available in routines and automations.
 
 ## Every day
 

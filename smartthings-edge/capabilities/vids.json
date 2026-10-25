@@ -1,6 +1,10 @@
 {
   "none": "9f665502-f721-39ae-850a-ab2c636ec3f7",
-  "progress": "fc436927-7175-3b0f-adaf-6e1b6a0e96e5",
-  "progressStatus": "5a00cfa2-6082-3789-8df5-2b9dbd1a0197",
-  "all": "8c5cb1f9-cd30-3673-a0ce-b556e0e9694b"
+  "p": "fc436927-7175-3b0f-adaf-6e1b6a0e96e5",
+  "s": "68ba8656-2883-3ae1-b7f8-673b18315e7f",
+  "ps": "5a00cfa2-6082-3789-8df5-2b9dbd1a0197",
+  "r": "fcc371c2-56ca-397f-9b84-c4cb23b81874",
+  "pr": "c5883a96-168a-309e-b1cf-54cbbb910549",
+  "sr": "4138b5d7-9983-3c2a-bcfd-118687b3723a",
+  "psr": "8c5cb1f9-cd30-3673-a0ce-b556e0e9694b"
 }

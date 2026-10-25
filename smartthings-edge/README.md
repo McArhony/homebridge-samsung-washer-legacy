@@ -13,9 +13,9 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
 | `src/course.lua` | programmes and settings of the WW10H9400EW, `WM_FUN_COURSE_OPTION` encoding |
 | `src/init.lua` | the SmartThings device |
 | `src/secrets/` | **git-ignored**: `ac14k_m.pem`, `ac14k_m.key` (`samsung-washer cert --dir src/secrets`), optional `token.lua` (`return "<token>"`) |
-| `profiles/samsung-washer-drc*.yml` | one profile per "Information card" choice; same capabilities and settings (information card, optional IP address, polling interval, "Pair now") |
+| `profiles/samsung-washer-drc*.yml` | one profile per combination of the "Show …" check boxes; same capabilities and settings (check boxes, optional IP address, polling interval, "Pair now") |
 | `capabilities/build.py` | generates the custom capabilities, presentations and translations into `capabilities/out/` (single-value ones in `CAPABILITIES`, multi-attribute ones in `MULTI`) |
-| `capabilities/build_profiles.py` | generates the four screen variants (`device-config-*.json`) and their profiles (`profiles/*.yml`, do not edit by hand); vids in `capabilities/vids.json` |
+| `capabilities/build_profiles.py` | generates the 8 screen variants (`device-config-*.json`) and their profiles (`profiles/*.yml`, do not edit by hand); vids in `capabilities/vids.json` |
 | `rules/build_auto_cycle_link.py` | optional washer → dryer rule |
 | `test/` | `lua test/test_drc.lua && lua test/test_course.lua` |
 | `tools/live_read.lua` | real read from a computer (luasocket + luasec): `OPENSSL_CONF=tools/openssl-seclevel0.cnf lua tools/live_read.lua <ip> <secrets-folder>` |
@@ -28,9 +28,9 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
 - `remoteControlStatus`: Smart Control on / off. `refresh`.
 - Screen: the grey control card (standard `washerOperatingState`, its buttons follow the state),
   then the programme and settings. The iOS app puts read-only values in a card between the two;
-  the **"Information card"** setting chooses what goes there (nothing, progress "Rinse · 85% ·
-  15 min" from `washerCycle`, plus the translated `washerStatus` line, plus Smart Control): the
-  driver switches the device to the matching profile. `washerControl` (start / pause / cancel
+  three check boxes (**Show progress** — "Rinse · 85% · 15 min" from `washerCycle` —, **Show
+  status** — the translated `washerStatus` line —, **Show Smart Control**) choose what goes there:
+  the driver switches the device to the matching profile (8 combinations). `washerControl` (start / pause / cancel
   without arguments) serves automations.
 - Custom capabilities, namespace `perfectforest07855`, translated (English default, French,
   German, Spanish, Italian): `washerProgramme`, `washerTemperature`, `washerSpin`, `washerRinse`

@@ -3,8 +3,9 @@
 and the matching profiles (profiles/samsung-washer-drc*.yml).
 
 The iOS app always shows read-only values in a card between the grey control
-card and the settings. The "Information card" setting of the device picks one
-of these variants; the driver then switches the device to its profile.
+card and the settings. Three check boxes of the device (show progress, status,
+Smart Control) pick one of these 8 variants; the driver then switches the
+device to its profile.
 
   python3 capabilities/build_profiles.py            # writes the device configs
   # create each config: smartthings presentation:device-config:create -i capabilities/device-config-<variant>.json
@@ -18,13 +19,21 @@ NS = "perfectforest07855"
 HERE = os.path.dirname(os.path.abspath(__file__))
 PROFILES_DIR = os.path.join(HERE, "..", "profiles")
 
-# variant: (profile name, read-only blocks shown in the information card)
-VARIANTS = {
-    "none": ("samsung-washer-drc", []),
-    "progress": ("samsung-washer-drc-progress", [NS + ".washerCycle"]),
-    "progressStatus": ("samsung-washer-drc-progress-status", [NS + ".washerCycle", NS + ".washerStatus"]),
-    "all": ("samsung-washer-drc-full", [NS + ".washerCycle", NS + ".washerStatus", "remoteControlStatus"]),
-}
+# Check boxes: (letter in the variant name, block shown when checked)
+BLOCKS = [("p", NS + ".washerCycle"), ("s", NS + ".washerStatus"), ("r", "remoteControlStatus")]
+
+
+def variants():
+    """variant key ("" or a combination of p, s, r) → (profile name, blocks)."""
+    out = {}
+    for mask in range(8):
+        key = "".join(letter for i, (letter, _) in enumerate(BLOCKS) if mask >> i & 1)
+        blocks = [cap for i, (_, cap) in enumerate(BLOCKS) if mask >> i & 1]
+        out[key] = ("samsung-washer-drc" + (f"-{key}" if key else ""), blocks)
+    return out
+
+
+VARIANTS = variants()
 
 SETTINGS = [NS + ".washerProgramme", NS + ".washerTemperature", NS + ".washerSpin", NS + ".washerRinse",
             NS + ".washerChildLock", NS + ".washerDispenser", "refresh"]
@@ -42,18 +51,26 @@ AUTOMATION_ACTIONS = [NS + ".washerControl", "washerOperatingState", NS + ".wash
                       NS + ".washerSpin", NS + ".washerRinse", NS + ".washerChildLock", NS + ".washerDispenser"]
 
 PREFERENCES = '''preferences:
-  - name: infoCard
-    title: "Information card"
-    description: "What to show between the controls and the programme"
+  - name: showProgress
+    title: "Show progress"
+    description: "Phase, progress and minutes left, above the programme"
     required: false
-    preferenceType: enumeration
+    preferenceType: boolean
     definition:
-      options:
-        none: "Hidden"
-        progress: "Progress"
-        progressStatus: "Progress and status"
-        all: "Progress, status and Smart Control"
-      default: none
+      default: false
+  - name: showStatus
+    title: "Show status"
+    description: "What needs attention (tanks, filter, drum clean, errors)"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
+  - name: showSmartControl
+    title: "Show Smart Control"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false
   - name: ipAddress
     title: "Washer IP address (optional)"
     description: "Leave empty: the washer is found automatically"
@@ -109,12 +126,12 @@ def main():
     vids_file = os.path.join(HERE, "vids.json")
     vids = json.load(open(vids_file)) if os.path.exists(vids_file) else {}
     for variant, (name, info) in VARIANTS.items():
-        with open(os.path.join(HERE, f"device-config-{variant}.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(HERE, f"device-config-{variant or 'none'}.json"), "w", encoding="utf-8") as f:
             json.dump(device_config(info), f, indent=2)
-        if variant in vids:
+        if (variant or "none") in vids:
             with open(os.path.join(PROFILES_DIR, f"{name}.yml"), "w", encoding="utf-8") as f:
-                f.write(profile(name, vids[variant]))
-    missing = [v for v in VARIANTS if v not in vids]
+                f.write(profile(name, vids[variant or "none"]))
+    missing = [v or "none" for v in VARIANTS if (v or "none") not in vids]
     print("device configs written" + (f"; vids missing for: {', '.join(missing)}" if missing else "; profiles written"))
 
 

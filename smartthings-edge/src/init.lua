@@ -431,24 +431,18 @@ local function toggle_handler(attribute, what, allowed_during_cycle)
   end
 end
 
--- "Information card" setting → profile (capabilities/build_profiles.py): the
--- iOS app shows read-only values between the controls and the settings, so
--- each variant shows a different set of them.
-local INFO_CARD_PROFILES = {
-  none = "samsung-washer-drc",
-  progress = "samsung-washer-drc-progress",
-  progressStatus = "samsung-washer-drc-progress-status",
-  all = "samsung-washer-drc-full",
-}
-
+-- Check boxes "Show progress / status / Smart Control" → profile
+-- (capabilities/build_profiles.py): the iOS app shows read-only values between
+-- the controls and the settings, so each combination has its own screen.
 local function apply_info_card(device)
-  local variant = device.preferences.infoCard or "none"
-  local profile = INFO_CARD_PROFILES[variant] or INFO_CARD_PROFILES.none
+  local p = device.preferences
+  local variant = (p.showProgress and "p" or "") .. (p.showStatus and "s" or "") .. (p.showSmartControl and "r" or "")
+  local profile = "samsung-washer-drc" .. (variant ~= "" and ("-" .. variant) or "")
   if device:get_field("profile") == profile then return end
   local ok, err = pcall(function() device:try_update_metadata({ profile = profile }) end)
   if ok then
     device:set_field("profile", profile, { persist = true })
-    device.log.info("information card: " .. variant)
+    device.log.info("screen: " .. profile)
   else
     device.log.warn("cannot switch profile: " .. tostring(err))
   end
@@ -468,7 +462,10 @@ local function info_changed(driver, device, event, args)
   local old = args.old_st_store.preferences or {}
   local new = device.preferences
   if new.pairNow and not old.pairNow then pair(driver, device) end
-  if new.infoCard ~= old.infoCard then apply_info_card(device) end
+  if new.showProgress ~= old.showProgress or new.showStatus ~= old.showStatus
+      or new.showSmartControl ~= old.showSmartControl then
+    apply_info_card(device)
+  end
   if new.ipAddress ~= old.ipAddress or new.pollSeconds ~= old.pollSeconds then
     refresh(driver, device)
     schedule_poll(driver, device)
