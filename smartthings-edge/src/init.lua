@@ -184,7 +184,11 @@ local function find_washer(driver, device)
   if device:get_field("scanning") then return end
   device:set_field("scanning", true)
   cosock.spawn(function()
-    local ip = discovery.find(driver, CERT, KEY)
+    local ok, ip = pcall(discovery.find, driver, CERT, KEY)
+    if not ok then
+      device.log.warn("discovery failed: " .. tostring(ip))
+      ip = nil
+    end
     device:set_field("scanning", false)
     if ip then
       device:set_field("ip", ip, { persist = true })

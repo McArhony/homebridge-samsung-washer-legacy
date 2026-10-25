@@ -11,7 +11,9 @@ local drc = require "drc"
 local M = {}
 
 local CONNECT_TIMEOUT_S = 1.5
-local SCAN_TIMEOUT_S = 20
+local SCAN_TIMEOUT_S = 90
+-- The hub limits open sockets: a few workers share the 254 addresses.
+local WORKERS = 12
 
 -- Local IPv4 of the hub (the WeMo driver's trick: no packet is sent).
 function M.hub_ip(driver)
@@ -26,6 +28,7 @@ end
 
 local function port_open(ip)
   local s = socket.tcp()
+  if not s then return false end
   s:settimeout(CONNECT_TIMEOUT_S)
   local ok = s:connect(ip, drc.PORT)
   s:close()
@@ -49,21 +52,27 @@ function M.find(driver, cert, key)
     return nil
   end
   log.info(string.format("discovery: scanning %s.1-254 on port %d", prefix, drc.PORT))
-  local open, pending = {}, 254
-  for i = 1, 254 do
-    local ip = prefix .. "." .. i
+  local open, next_host, running = {}, 1, WORKERS
+  for w = 1, WORKERS do
     cosock.spawn(function()
-      if ip ~= hub and port_open(ip) then open[#open + 1] = ip end
-      pending = pending - 1
-    end, "scan " .. ip)
+      while next_host <= 254 do
+        local ip = prefix .. "." .. next_host
+        next_host = next_host + 1
+        -- An error in a spawned task would stop the whole driver.
+        local ok, found = pcall(port_open, ip)
+        if ok and found and ip ~= hub then open[#open + 1] = ip end
+      end
+      running = running - 1
+    end, "scan worker " .. w)
   end
   local waited = 0
-  while pending > 0 and waited < SCAN_TIMEOUT_S do
+  while running > 0 and waited < SCAN_TIMEOUT_S do
     socket.sleep(0.5)
     waited = waited + 0.5
   end
   for _, ip in ipairs(open) do
-    if is_washer(ip, cert, key) then
+    local ok, washer = pcall(is_washer, ip, cert, key)
+    if ok and washer then
       log.info("discovery: washer found at " .. ip)
       return ip
     end
