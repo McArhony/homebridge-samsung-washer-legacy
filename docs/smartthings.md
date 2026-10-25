@@ -11,9 +11,11 @@ pause / cancel, and its programme, temperature, spin and rinses.
 - A washer that speaks the **2878 protocol** (about 2013-2015, e.g. WW10H9400EW), **already on
   your Wi-Fi**. These washers were put on the Wi-Fi with Samsung's old "Smart Washer" app; if
   yours never was, there is currently no known way to do it.
-- A **SmartThings hub that runs Edge drivers**: a SmartThings / Aeotec hub, or a recent Samsung
-  TV or monitor with a built-in hub (this project runs on a 2025 Frame TV). In the SmartThings
-  app, your hub shows up as a device; that is enough.
+- A **SmartThings hub that runs Edge drivers**: SmartThings Hub v2 or v3, Aeotec Smart Home Hub
+  (1 or 2), ThingsOne, or a recent Samsung TV with a built-in hub (this project runs on a 2025
+  Frame TV). In the SmartThings app, your hub shows up as a device. Other "hub" devices
+  (SmartThings Station, monitors, fridges) are not confirmed; see the
+  [README](../README.md#which-smartthings-hub-do-i-need).
 - A **computer** (Mac, Windows or Linux) on the same network as the washer, for the setup only.
 - A **fixed IP address** for the washer is recommended: in your router's settings, look for
   "DHCP reservation" or "static lease" and reserve the washer's current address.

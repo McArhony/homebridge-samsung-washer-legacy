@@ -20,6 +20,21 @@ Samsung's cloud.
 Both use the same small command line tool, `samsung-washer` (in this repository), to find and
 test the washer.
 
+## Which SmartThings hub do I need?
+
+The driver runs **locally on a SmartThings hub that runs Edge drivers**:
+
+- SmartThings Hub v2 (2015) or v3 (2018) — often found second-hand;
+- Aeotec Smart Home Hub or Smart Home Hub 2;
+- ThingsOne Smart Home Hub;
+- a recent Samsung TV with a built-in SmartThings hub (checked on a 2025 Frame TV).
+
+Other Samsung devices advertised as hubs (SmartThings Station, Smart Monitors, Family Hub
+fridges) are not confirmed to run LAN Edge drivers: tell us in
+[Discussions](https://github.com/McArhony/smartthings-samsung-drc-washer/discussions) if you try.
+No hub at all? There is no SmartThings option yet (a cloud bridge is being considered); the
+Homebridge plugin works without SmartThings.
+
 ## Is my washer supported?
 
 These washers expose an undocumented local protocol. Two generations exist:
