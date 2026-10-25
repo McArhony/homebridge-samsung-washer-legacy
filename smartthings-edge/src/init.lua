@@ -208,6 +208,8 @@ end
 
 local function emit_state(device, v)
   local state = machine_state(v.WM_FUN_OPERATION)
+  -- At the end the washer reports Start + "Finish" until it leaves the Wi-Fi.
+  if job_state(v.WM_FUN_PROGRESS) == "finish" then state = "stop" end
   device:set_field("machine_state", state)
   device:emit_event(washerOperatingState.machineState(state))
   local job = job_state(v.WM_FUN_PROGRESS)
