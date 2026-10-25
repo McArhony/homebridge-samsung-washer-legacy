@@ -14,9 +14,9 @@ git-ignored.
 |---|---|
 | 2878 protocol | ✅ decoded on a WW10H9400EW: state, commands, programmes, settings ([docs/protocol.md](docs/protocol.md)) |
 | SmartThings Edge driver | ✅ in daily use: state, phase, remaining time, start/pause/cancel, programme, temperature, spin, rinses, 5 languages |
-| Driver discovery | 🧪 new: finds the washer on the hub's /24 network on port 2878, no address to type; to be confirmed on a real install |
+| Driver discovery | ✅ finds the washer on the hub's /24 network on port 2878 (31 s on the owner's hub); no address to type |
 | In-app pairing ("Pair now") | 🧪 written, not yet used on a real washer (the first token came from `samsung-washer pair`) |
-| Washer → dryer rule | 🧪 created on one install; not yet seen on a real end of cycle |
+| Washer → dryer rule | ✅ seen working on 25/10: after a Bedding wash, the dryer was set to Bedding when switched on |
 | Homebridge plugin | 🚧 state and start/pause checked on 2878; "finished" sensor never observed; 8888 only simulated |
 | `samsung-washer` tool | ✅ `find`, `cert`, `test`, `pair`, `status`, `start`, `pause`, `cancel` |
 | Tests | Node: `npm test` (simulated 2878 and 8888 washers). Lua: `lua smartthings-edge/test/test_drc.lua && lua smartthings-edge/test/test_course.lua` |
@@ -36,8 +36,7 @@ git-ignored.
 
 ## Next steps
 
-1. **Watch a full wash** on the SmartThings driver: remaining time going down, final phase name,
-   "finished", `WM_FUN_OPERATION_PROGRESS` steps, then the dryer rule.
+1. ~~Watch a full wash~~ (done 25/10: phases, countdown, progress to 100 %, "Finish", dryer rule).
 1b. **Understand the held start** ([docs/protocol.md](docs/protocol.md), "Held start"): a remote
    start from stop, Smart Control on, was once held until Smart Control was turned off. The driver
    now shows "waiting…" in that case.

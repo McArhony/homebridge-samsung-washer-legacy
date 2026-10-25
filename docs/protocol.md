@@ -86,7 +86,11 @@ screen does, until the cycle is cancelled.
 
 `WM_FUN_OPERATION_PROGRESS` is the cycle's **progress in percent** (1 when stopped; e.g. 33 with
 64 of about 95 minutes left). The light key of the washer changes no attribute at all.
-Not seen yet: the phase name at the very end of a cycle.
+**A full cycle** (Bedding, observed 25/10/2026): `Weightsensing` → `Wash` → `Rinse` → `Spin` →
+`Finish`. `WM_FUN_OTLEFT` counts down minute by minute to 1 and `WM_FUN_OPERATION_PROGRESS`
+reaches 100. At the end the washer keeps reporting `WM_FUN_OPERATION=Start` with
+`WM_FUN_PROGRESS=Finish` (the driver treats it as stopped and finished), then leaves the Wi-Fi
+about two minutes later.
 
 ### Programme and settings: `WM_FUN_COURSE_OPTION`
 

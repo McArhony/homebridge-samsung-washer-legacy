@@ -76,7 +76,8 @@ create each `capabilities/device-config-*.json` with
 while the washer shows `finish`, the dryer gets the matching drying programme
 (`custom.supportedOptions.setCourse`, accepted without the dryer's remote control; it never starts
 the dryer). The dryer codes (reference table `Table_03`) and the washer → dryer mapping are at the
-top of the script; check them against your dryer ([docs/protocol.md](../docs/protocol.md)).
+top of the script; check them against your dryer ([docs/protocol.md](../docs/protocol.md)). Seen working
+on a real wash.
 
 ```sh
 smartthings devices                      # note the washer's and the dryer's device IDs
