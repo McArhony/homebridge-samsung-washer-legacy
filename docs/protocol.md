@@ -61,7 +61,7 @@ The washer also pushes `<Update Type="Status">` messages after every change.
 | `WM_FUN_QUICK_WASH` | Express: 60/50/40/30/20/15/Off (read only) |
 | `WM_FUN_EASY_IRON` | Easy iron (read only) |
 | `WM_FUN_AUTO_DETERGENT`, `WM_FUN_AUTO_SOFTENER` | auto dispenser: `Enable` / `Disable` (`NotUsed` for some programmes); **writable**, checked |
-| `WM_FUN_DETERGENT_INFO`, `WM_FUN_SOFTENER_INFO` | tank levels (`Normal` seen; other values not seen yet) |
+| `WM_FUN_DETERGENT_INFO`, `WM_FUN_SOFTENER_INFO` | tank levels (`Normal` seen; other values not seen yet). They do not change with the dose settings |
 | `WM_FUN_DISPENSER_OPEN`, `WM_FUN_DISPENSER_ABNORMAL` | drawer `Open` / `Close`; dispenser fault `On` / `Off` |
 | `WM_FUN_DRUM_CLEAN`, `WM_FUN_FILTER_ALARM`, `WM_FUN_HOT_WARNING` | maintenance alerts, `On` / `Off` |
 | `WM_FUN_CHILD_LOCK` | `Enable` / `Disable`; **writable**, checked |
@@ -121,6 +121,7 @@ plus) · `ActiveSports` 42 (Sport) · `ActiveKids` 1E (Enfants actifs) · `DeskO
 
 ### Not available remotely
 
+- **Auto dispenser dose and water hardness** (detergent and softener: less / standard / more, soft / medium / hard): changing them on the screen changes no attribute; not available.
 - **Intensive, pre-wash, soak**: invisible (only the time changes) and not settable
   (`WM_FUN_COURSE_OPT_LIST` refuses "Intensive", "PreWash", "Soak", "B1" → 211).
 - **Delayed end**: `WM_FUN_SETTIME="03:00"` is accepted but ignored (a Start after it ran a real

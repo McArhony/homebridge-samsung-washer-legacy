@@ -61,8 +61,8 @@ their programme list will differ: please open an issue with the output of
   on remotely.
 - ⚠️ **Never hold the Smart Control button until "AP" shows**: the washer would leave your Wi-Fi,
   and without Samsung's old app you may not be able to reconnect it.
-- Not available remotely: intensive, pre-wash and soak options, delayed end; Express and Easy iron
-  are read only.
+- Not available remotely: intensive, pre-wash and soak options, delayed end, the auto dispenser's dose
+  and water hardness, the drum light; Express and Easy iron are read only.
 
 ## More
 
