@@ -1,0 +1,80 @@
+{
+  "tag": "fr",
+  "label": "Programme",
+  "attributes": {
+    "programme": {
+      "label": "Programme",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "SmartWash": {
+            "label": "Lavage auto optimal"
+          },
+          "Cotton": {
+            "label": "Coton"
+          },
+          "Synthetics": {
+            "label": "Synthétiques"
+          },
+          "Denim": {
+            "label": "Jeans"
+          },
+          "DarkGarment": {
+            "label": "Couleurs"
+          },
+          "SuperSpeed": {
+            "label": "Super rapide"
+          },
+          "SuperEcoWash": {
+            "label": "Eco"
+          },
+          "OutdoorCare": {
+            "label": "Imperméable"
+          },
+          "BabyCare": {
+            "label": "Bébé coton"
+          },
+          "Wool": {
+            "label": "Laine"
+          },
+          "DelicatesWash": {
+            "label": "Délicats"
+          },
+          "Bedding1": {
+            "label": "Draps"
+          },
+          "Spin": {
+            "label": "Essorage"
+          },
+          "RinseSpin": {
+            "label": "Rinçage + essorage"
+          },
+          "EcoDrumClean": {
+            "label": "Nettoyage tambour"
+          },
+          "DiningKitchenwork": {
+            "label": "Cuisine"
+          },
+          "Gardening": {
+            "label": "Jardinage"
+          },
+          "HygieneCare": {
+            "label": "Soin hygiène plus"
+          },
+          "ActiveSports": {
+            "label": "Sport"
+          },
+          "ActiveKids": {
+            "label": "Enfants actifs"
+          },
+          "DeskOffice": {
+            "label": "Quotidien"
+          },
+          "CottonEco": {
+            "label": "e coton"
+          }
+        }
+      }
+    }
+  }
+}

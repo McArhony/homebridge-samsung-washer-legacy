@@ -1,0 +1,173 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.label}}",
+      "displayType": "list",
+      "list": {
+        "command": {
+          "name": "setRinse",
+          "alternatives": [
+            {
+              "key": "0",
+              "value": "{{i18n.attributes.rinse.i18n.value.0.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1",
+              "value": "{{i18n.attributes.rinse.i18n.value.1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "2",
+              "value": "{{i18n.attributes.rinse.i18n.value.2.label}}",
+              "type": "active"
+            },
+            {
+              "key": "3",
+              "value": "{{i18n.attributes.rinse.i18n.value.3.label}}",
+              "type": "active"
+            },
+            {
+              "key": "4",
+              "value": "{{i18n.attributes.rinse.i18n.value.4.label}}",
+              "type": "active"
+            },
+            {
+              "key": "5",
+              "value": "{{i18n.attributes.rinse.i18n.value.5.label}}",
+              "type": "active"
+            }
+          ],
+          "supportedValues": "supportedRinses.value"
+        },
+        "state": {
+          "value": "rinse.value",
+          "valueType": "string",
+          "alternatives": [
+            {
+              "key": "0",
+              "value": "{{i18n.attributes.rinse.i18n.value.0.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1",
+              "value": "{{i18n.attributes.rinse.i18n.value.1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "2",
+              "value": "{{i18n.attributes.rinse.i18n.value.2.label}}",
+              "type": "active"
+            },
+            {
+              "key": "3",
+              "value": "{{i18n.attributes.rinse.i18n.value.3.label}}",
+              "type": "active"
+            },
+            {
+              "key": "4",
+              "value": "{{i18n.attributes.rinse.i18n.value.4.label}}",
+              "type": "active"
+            },
+            {
+              "key": "5",
+              "value": "{{i18n.attributes.rinse.i18n.value.5.label}}",
+              "type": "active"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "0",
+              "value": "{{i18n.attributes.rinse.i18n.value.0.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1",
+              "value": "{{i18n.attributes.rinse.i18n.value.1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "2",
+              "value": "{{i18n.attributes.rinse.i18n.value.2.label}}",
+              "type": "active"
+            },
+            {
+              "key": "3",
+              "value": "{{i18n.attributes.rinse.i18n.value.3.label}}",
+              "type": "active"
+            },
+            {
+              "key": "4",
+              "value": "{{i18n.attributes.rinse.i18n.value.4.label}}",
+              "type": "active"
+            },
+            {
+              "key": "5",
+              "value": "{{i18n.attributes.rinse.i18n.value.5.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "rinse.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "0",
+              "value": "{{i18n.attributes.rinse.i18n.value.0.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1",
+              "value": "{{i18n.attributes.rinse.i18n.value.1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "2",
+              "value": "{{i18n.attributes.rinse.i18n.value.2.label}}",
+              "type": "active"
+            },
+            {
+              "key": "3",
+              "value": "{{i18n.attributes.rinse.i18n.value.3.label}}",
+              "type": "active"
+            },
+            {
+              "key": "4",
+              "value": "{{i18n.attributes.rinse.i18n.value.4.label}}",
+              "type": "active"
+            },
+            {
+              "key": "5",
+              "value": "{{i18n.attributes.rinse.i18n.value.5.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setRinse",
+          "argumentType": "string",
+          "supportedValues": "supportedRinses.value"
+        }
+      }
+    ]
+  }
+}

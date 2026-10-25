@@ -1,0 +1,32 @@
+{
+  "tag": "fr",
+  "label": "Essorage",
+  "attributes": {
+    "spin": {
+      "label": "Essorage",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "rinseHold": {
+            "label": "Rinçage en attente"
+          },
+          "noSpin": {
+            "label": "Sans essorage"
+          },
+          "400": {
+            "label": "400 tr/min"
+          },
+          "800": {
+            "label": "800 tr/min"
+          },
+          "1200": {
+            "label": "1200 tr/min"
+          },
+          "1400": {
+            "label": "1400 tr/min"
+          }
+        }
+      }
+    }
+  }
+}

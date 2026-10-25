@@ -1,0 +1,14 @@
+{
+  "tag": "it",
+  "label": "Tempo residuo",
+  "attributes": {
+    "remainingTime": {
+      "label": "Tempo residuo",
+      "displayTemplate": "{{device.label}}: {{value}} min"
+    },
+    "remainingTimeStr": {
+      "label": "Tempo residuo",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    }
+  }
+}

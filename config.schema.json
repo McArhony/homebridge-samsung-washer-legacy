@@ -1,0 +1,80 @@
+{
+  "pluginAlias": "SamsungWasherLegacy",
+  "pluginType": "accessory",
+  "singular": false,
+  "headerDisplay": "Before enabling: in the Homebridge terminal, run `samsung-washer cert` then `samsung-washer pair <washer-ip>` (you will have to press Smart Control).",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "default": "Washer",
+        "required": true
+      },
+      "host": {
+        "title": "Washer IP address",
+        "type": "string",
+        "format": "ipv4",
+        "required": true,
+        "description": "Make it fixed on your router (DHCP reservation)."
+      },
+      "pollSeconds": {
+        "title": "Polling interval (s)",
+        "type": "integer",
+        "default": 30,
+        "minimum": 10
+      },
+      "offAction": {
+        "title": "When switched off in the Home app",
+        "type": "string",
+        "default": "pause",
+        "oneOf": [
+          { "title": "Pause", "enum": ["pause"] },
+          { "title": "Cancel the cycle", "enum": ["cancel"] }
+        ]
+      },
+      "finishedSensor": {
+        "title": "\"Finished\" sensor (for notifications)",
+        "type": "boolean",
+        "default": true
+      },
+      "finishedResetMinutes": {
+        "title": "How long \"finished\" stays on (min)",
+        "type": "integer",
+        "default": 60,
+        "minimum": 1
+      },
+      "model": {
+        "title": "Model (display)",
+        "type": "string",
+        "default": "WW10H9400EW"
+      },
+      "protocol": {
+        "title": "Protocol",
+        "type": "string",
+        "default": "auto",
+        "oneOf": [
+          { "title": "Automatic", "enum": ["auto"] },
+          { "title": "XML, port 2878 (2013-2015, e.g. WW10H9400EW)", "enum": ["drc"] },
+          { "title": "JSON, port 8888 (2016-2018)", "enum": ["rest"] }
+        ]
+      },
+      "identity": {
+        "title": "Certificate",
+        "type": "string",
+        "default": "auto",
+        "oneOf": [
+          { "title": "Automatic", "enum": ["auto"] },
+          { "title": "Samsung certificate (AC14K_M)", "enum": ["ca"] },
+          { "title": "Derived certificate", "enum": ["leaf"] }
+        ]
+      },
+      "token": {
+        "title": "Token (optional)",
+        "type": "string",
+        "description": "Leave empty: the token saved by \"samsung-washer pair\" is used."
+      }
+    }
+  }
+}

@@ -1,0 +1,493 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.label}}",
+      "displayType": "list",
+      "list": {
+        "command": {
+          "name": "setProgramme",
+          "alternatives": [
+            {
+              "key": "SmartWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SmartWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Cotton",
+              "value": "{{i18n.attributes.programme.i18n.value.Cotton.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Synthetics",
+              "value": "{{i18n.attributes.programme.i18n.value.Synthetics.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Denim",
+              "value": "{{i18n.attributes.programme.i18n.value.Denim.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DarkGarment",
+              "value": "{{i18n.attributes.programme.i18n.value.DarkGarment.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperSpeed",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperSpeed.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperEcoWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperEcoWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "OutdoorCare",
+              "value": "{{i18n.attributes.programme.i18n.value.OutdoorCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "BabyCare",
+              "value": "{{i18n.attributes.programme.i18n.value.BabyCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Wool",
+              "value": "{{i18n.attributes.programme.i18n.value.Wool.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DelicatesWash",
+              "value": "{{i18n.attributes.programme.i18n.value.DelicatesWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Bedding1",
+              "value": "{{i18n.attributes.programme.i18n.value.Bedding1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Spin",
+              "value": "{{i18n.attributes.programme.i18n.value.Spin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "RinseSpin",
+              "value": "{{i18n.attributes.programme.i18n.value.RinseSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "EcoDrumClean",
+              "value": "{{i18n.attributes.programme.i18n.value.EcoDrumClean.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DiningKitchenwork",
+              "value": "{{i18n.attributes.programme.i18n.value.DiningKitchenwork.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Gardening",
+              "value": "{{i18n.attributes.programme.i18n.value.Gardening.label}}",
+              "type": "active"
+            },
+            {
+              "key": "HygieneCare",
+              "value": "{{i18n.attributes.programme.i18n.value.HygieneCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveSports",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveSports.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveKids",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveKids.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DeskOffice",
+              "value": "{{i18n.attributes.programme.i18n.value.DeskOffice.label}}",
+              "type": "active"
+            },
+            {
+              "key": "CottonEco",
+              "value": "{{i18n.attributes.programme.i18n.value.CottonEco.label}}",
+              "type": "active"
+            }
+          ],
+          "supportedValues": "supportedProgrammes.value"
+        },
+        "state": {
+          "value": "programme.value",
+          "valueType": "string",
+          "alternatives": [
+            {
+              "key": "SmartWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SmartWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Cotton",
+              "value": "{{i18n.attributes.programme.i18n.value.Cotton.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Synthetics",
+              "value": "{{i18n.attributes.programme.i18n.value.Synthetics.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Denim",
+              "value": "{{i18n.attributes.programme.i18n.value.Denim.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DarkGarment",
+              "value": "{{i18n.attributes.programme.i18n.value.DarkGarment.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperSpeed",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperSpeed.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperEcoWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperEcoWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "OutdoorCare",
+              "value": "{{i18n.attributes.programme.i18n.value.OutdoorCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "BabyCare",
+              "value": "{{i18n.attributes.programme.i18n.value.BabyCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Wool",
+              "value": "{{i18n.attributes.programme.i18n.value.Wool.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DelicatesWash",
+              "value": "{{i18n.attributes.programme.i18n.value.DelicatesWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Bedding1",
+              "value": "{{i18n.attributes.programme.i18n.value.Bedding1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Spin",
+              "value": "{{i18n.attributes.programme.i18n.value.Spin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "RinseSpin",
+              "value": "{{i18n.attributes.programme.i18n.value.RinseSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "EcoDrumClean",
+              "value": "{{i18n.attributes.programme.i18n.value.EcoDrumClean.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DiningKitchenwork",
+              "value": "{{i18n.attributes.programme.i18n.value.DiningKitchenwork.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Gardening",
+              "value": "{{i18n.attributes.programme.i18n.value.Gardening.label}}",
+              "type": "active"
+            },
+            {
+              "key": "HygieneCare",
+              "value": "{{i18n.attributes.programme.i18n.value.HygieneCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveSports",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveSports.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveKids",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveKids.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DeskOffice",
+              "value": "{{i18n.attributes.programme.i18n.value.DeskOffice.label}}",
+              "type": "active"
+            },
+            {
+              "key": "CottonEco",
+              "value": "{{i18n.attributes.programme.i18n.value.CottonEco.label}}",
+              "type": "active"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "SmartWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SmartWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Cotton",
+              "value": "{{i18n.attributes.programme.i18n.value.Cotton.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Synthetics",
+              "value": "{{i18n.attributes.programme.i18n.value.Synthetics.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Denim",
+              "value": "{{i18n.attributes.programme.i18n.value.Denim.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DarkGarment",
+              "value": "{{i18n.attributes.programme.i18n.value.DarkGarment.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperSpeed",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperSpeed.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperEcoWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperEcoWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "OutdoorCare",
+              "value": "{{i18n.attributes.programme.i18n.value.OutdoorCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "BabyCare",
+              "value": "{{i18n.attributes.programme.i18n.value.BabyCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Wool",
+              "value": "{{i18n.attributes.programme.i18n.value.Wool.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DelicatesWash",
+              "value": "{{i18n.attributes.programme.i18n.value.DelicatesWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Bedding1",
+              "value": "{{i18n.attributes.programme.i18n.value.Bedding1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Spin",
+              "value": "{{i18n.attributes.programme.i18n.value.Spin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "RinseSpin",
+              "value": "{{i18n.attributes.programme.i18n.value.RinseSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "EcoDrumClean",
+              "value": "{{i18n.attributes.programme.i18n.value.EcoDrumClean.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DiningKitchenwork",
+              "value": "{{i18n.attributes.programme.i18n.value.DiningKitchenwork.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Gardening",
+              "value": "{{i18n.attributes.programme.i18n.value.Gardening.label}}",
+              "type": "active"
+            },
+            {
+              "key": "HygieneCare",
+              "value": "{{i18n.attributes.programme.i18n.value.HygieneCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveSports",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveSports.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveKids",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveKids.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DeskOffice",
+              "value": "{{i18n.attributes.programme.i18n.value.DeskOffice.label}}",
+              "type": "active"
+            },
+            {
+              "key": "CottonEco",
+              "value": "{{i18n.attributes.programme.i18n.value.CottonEco.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "programme.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "SmartWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SmartWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Cotton",
+              "value": "{{i18n.attributes.programme.i18n.value.Cotton.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Synthetics",
+              "value": "{{i18n.attributes.programme.i18n.value.Synthetics.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Denim",
+              "value": "{{i18n.attributes.programme.i18n.value.Denim.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DarkGarment",
+              "value": "{{i18n.attributes.programme.i18n.value.DarkGarment.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperSpeed",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperSpeed.label}}",
+              "type": "active"
+            },
+            {
+              "key": "SuperEcoWash",
+              "value": "{{i18n.attributes.programme.i18n.value.SuperEcoWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "OutdoorCare",
+              "value": "{{i18n.attributes.programme.i18n.value.OutdoorCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "BabyCare",
+              "value": "{{i18n.attributes.programme.i18n.value.BabyCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Wool",
+              "value": "{{i18n.attributes.programme.i18n.value.Wool.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DelicatesWash",
+              "value": "{{i18n.attributes.programme.i18n.value.DelicatesWash.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Bedding1",
+              "value": "{{i18n.attributes.programme.i18n.value.Bedding1.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Spin",
+              "value": "{{i18n.attributes.programme.i18n.value.Spin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "RinseSpin",
+              "value": "{{i18n.attributes.programme.i18n.value.RinseSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "EcoDrumClean",
+              "value": "{{i18n.attributes.programme.i18n.value.EcoDrumClean.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DiningKitchenwork",
+              "value": "{{i18n.attributes.programme.i18n.value.DiningKitchenwork.label}}",
+              "type": "active"
+            },
+            {
+              "key": "Gardening",
+              "value": "{{i18n.attributes.programme.i18n.value.Gardening.label}}",
+              "type": "active"
+            },
+            {
+              "key": "HygieneCare",
+              "value": "{{i18n.attributes.programme.i18n.value.HygieneCare.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveSports",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveSports.label}}",
+              "type": "active"
+            },
+            {
+              "key": "ActiveKids",
+              "value": "{{i18n.attributes.programme.i18n.value.ActiveKids.label}}",
+              "type": "active"
+            },
+            {
+              "key": "DeskOffice",
+              "value": "{{i18n.attributes.programme.i18n.value.DeskOffice.label}}",
+              "type": "active"
+            },
+            {
+              "key": "CottonEco",
+              "value": "{{i18n.attributes.programme.i18n.value.CottonEco.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setProgramme",
+          "argumentType": "string",
+          "supportedValues": "supportedProgrammes.value"
+        }
+      }
+    ]
+  }
+}

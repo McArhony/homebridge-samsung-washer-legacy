@@ -1,0 +1,32 @@
+{
+  "tag": "it",
+  "label": "Centrifuga",
+  "attributes": {
+    "spin": {
+      "label": "Centrifuga",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "rinseHold": {
+            "label": "Stop risciacquo"
+          },
+          "noSpin": {
+            "label": "Senza centrifuga"
+          },
+          "400": {
+            "label": "400 giri"
+          },
+          "800": {
+            "label": "800 giri"
+          },
+          "1200": {
+            "label": "1200 giri"
+          },
+          "1400": {
+            "label": "1400 giri"
+          }
+        }
+      }
+    }
+  }
+}

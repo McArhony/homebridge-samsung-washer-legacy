@@ -1,0 +1,45 @@
+{
+  "name": "Washer Remaining Time",
+  "attributes": {
+    "remainingTime": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1440
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "min"
+            ],
+            "default": "min"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": []
+    },
+    "remainingTimeStr": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": []
+    }
+  },
+  "commands": {}
+}

@@ -1,0 +1,35 @@
+{
+  "tag": "es",
+  "label": "Temperatura",
+  "attributes": {
+    "temperature": {
+      "label": "Temperatura",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "none": {
+            "label": "Ninguna"
+          },
+          "cold": {
+            "label": "Frío"
+          },
+          "20": {
+            "label": "20 °C"
+          },
+          "30": {
+            "label": "30 °C"
+          },
+          "40": {
+            "label": "40 °C"
+          },
+          "60": {
+            "label": "60 °C"
+          },
+          "95": {
+            "label": "95 °C"
+          }
+        }
+      }
+    }
+  }
+}

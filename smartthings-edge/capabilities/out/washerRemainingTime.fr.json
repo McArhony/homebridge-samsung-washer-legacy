@@ -1,0 +1,14 @@
+{
+  "tag": "fr",
+  "label": "Temps restant",
+  "attributes": {
+    "remainingTime": {
+      "label": "Temps restant",
+      "displayTemplate": "{{device.label}}: {{value}} min"
+    },
+    "remainingTimeStr": {
+      "label": "Temps restant",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    }
+  }
+}

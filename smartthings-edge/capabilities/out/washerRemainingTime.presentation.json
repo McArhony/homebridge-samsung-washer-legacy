@@ -1,0 +1,37 @@
+{
+  "dashboard": {
+    "states": [
+      {
+        "label": "{{remainingTimeStr.value}}"
+      }
+    ],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{remainingTimeStr.value}}"
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "numberField",
+        "numberField": {
+          "value": "remainingTime.value",
+          "valueType": "integer",
+          "unit": "remainingTime.unit",
+          "range": [
+            0,
+            1440
+          ]
+        }
+      }
+    ],
+    "actions": []
+  }
+}

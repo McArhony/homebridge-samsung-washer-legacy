@@ -1,0 +1,8 @@
+# Local tests only: Samsung's certificates are SHA-1, refused at OpenSSL 3's default level.
+openssl_conf = default_conf
+[default_conf]
+ssl_conf = ssl_sect
+[ssl_sect]
+system_default = system_default_sect
+[system_default_sect]
+CipherString = DEFAULT@SECLEVEL=0

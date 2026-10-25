@@ -1,0 +1,37 @@
+{
+  "name": "homebridge-samsung-washer-legacy",
+  "displayName": "Samsung Washer Legacy (Smart Control)",
+  "version": "0.2.2",
+  "description": "Local control of Samsung \"Smart Control\" Wi-Fi washers (2013-2018, XML 2878 and JSON 8888 protocols) unsupported by SmartThings: SmartThings Edge driver, command line tool and Homebridge plugin.",
+  "main": "index.js",
+  "bin": {
+    "samsung-washer": "bin/cli.js"
+  },
+  "files": [
+    "index.js",
+    "lib/",
+    "bin/",
+    "config.schema.json",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "samsung",
+    "washer",
+    "smartthings",
+    "edge-driver",
+    "smart control"
+  ],
+  "engines": {
+    "node": ">=18",
+    "homebridge": "^1.6.0 || ^2.0.0-beta.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/McArhony/smartthings-samsung-drc-washer.git"
+  }
+}

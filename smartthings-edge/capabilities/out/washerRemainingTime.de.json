@@ -1,0 +1,14 @@
+{
+  "tag": "de",
+  "label": "Restzeit",
+  "attributes": {
+    "remainingTime": {
+      "label": "Restzeit",
+      "displayTemplate": "{{device.label}}: {{value}} min"
+    },
+    "remainingTimeStr": {
+      "label": "Restzeit",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    }
+  }
+}

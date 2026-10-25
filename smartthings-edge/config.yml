@@ -1,0 +1,6 @@
+name: 'Samsung Washer Legacy'
+packageKey: 'samsung-washer-legacy'
+description: "Samsung Wi-Fi washers of 2013-2015 (local XML protocol, port 2878)"
+permissions:
+  lan: {}
+  discovery: {}

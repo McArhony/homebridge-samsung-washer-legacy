@@ -1,0 +1,193 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.label}}",
+      "displayType": "list",
+      "list": {
+        "command": {
+          "name": "setTemperature",
+          "alternatives": [
+            {
+              "key": "none",
+              "value": "{{i18n.attributes.temperature.i18n.value.none.label}}",
+              "type": "active"
+            },
+            {
+              "key": "cold",
+              "value": "{{i18n.attributes.temperature.i18n.value.cold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "20",
+              "value": "{{i18n.attributes.temperature.i18n.value.20.label}}",
+              "type": "active"
+            },
+            {
+              "key": "30",
+              "value": "{{i18n.attributes.temperature.i18n.value.30.label}}",
+              "type": "active"
+            },
+            {
+              "key": "40",
+              "value": "{{i18n.attributes.temperature.i18n.value.40.label}}",
+              "type": "active"
+            },
+            {
+              "key": "60",
+              "value": "{{i18n.attributes.temperature.i18n.value.60.label}}",
+              "type": "active"
+            },
+            {
+              "key": "95",
+              "value": "{{i18n.attributes.temperature.i18n.value.95.label}}",
+              "type": "active"
+            }
+          ],
+          "supportedValues": "supportedTemperatures.value"
+        },
+        "state": {
+          "value": "temperature.value",
+          "valueType": "string",
+          "alternatives": [
+            {
+              "key": "none",
+              "value": "{{i18n.attributes.temperature.i18n.value.none.label}}",
+              "type": "active"
+            },
+            {
+              "key": "cold",
+              "value": "{{i18n.attributes.temperature.i18n.value.cold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "20",
+              "value": "{{i18n.attributes.temperature.i18n.value.20.label}}",
+              "type": "active"
+            },
+            {
+              "key": "30",
+              "value": "{{i18n.attributes.temperature.i18n.value.30.label}}",
+              "type": "active"
+            },
+            {
+              "key": "40",
+              "value": "{{i18n.attributes.temperature.i18n.value.40.label}}",
+              "type": "active"
+            },
+            {
+              "key": "60",
+              "value": "{{i18n.attributes.temperature.i18n.value.60.label}}",
+              "type": "active"
+            },
+            {
+              "key": "95",
+              "value": "{{i18n.attributes.temperature.i18n.value.95.label}}",
+              "type": "active"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "none",
+              "value": "{{i18n.attributes.temperature.i18n.value.none.label}}",
+              "type": "active"
+            },
+            {
+              "key": "cold",
+              "value": "{{i18n.attributes.temperature.i18n.value.cold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "20",
+              "value": "{{i18n.attributes.temperature.i18n.value.20.label}}",
+              "type": "active"
+            },
+            {
+              "key": "30",
+              "value": "{{i18n.attributes.temperature.i18n.value.30.label}}",
+              "type": "active"
+            },
+            {
+              "key": "40",
+              "value": "{{i18n.attributes.temperature.i18n.value.40.label}}",
+              "type": "active"
+            },
+            {
+              "key": "60",
+              "value": "{{i18n.attributes.temperature.i18n.value.60.label}}",
+              "type": "active"
+            },
+            {
+              "key": "95",
+              "value": "{{i18n.attributes.temperature.i18n.value.95.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "temperature.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "none",
+              "value": "{{i18n.attributes.temperature.i18n.value.none.label}}",
+              "type": "active"
+            },
+            {
+              "key": "cold",
+              "value": "{{i18n.attributes.temperature.i18n.value.cold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "20",
+              "value": "{{i18n.attributes.temperature.i18n.value.20.label}}",
+              "type": "active"
+            },
+            {
+              "key": "30",
+              "value": "{{i18n.attributes.temperature.i18n.value.30.label}}",
+              "type": "active"
+            },
+            {
+              "key": "40",
+              "value": "{{i18n.attributes.temperature.i18n.value.40.label}}",
+              "type": "active"
+            },
+            {
+              "key": "60",
+              "value": "{{i18n.attributes.temperature.i18n.value.60.label}}",
+              "type": "active"
+            },
+            {
+              "key": "95",
+              "value": "{{i18n.attributes.temperature.i18n.value.95.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setTemperature",
+          "argumentType": "string",
+          "supportedValues": "supportedTemperatures.value"
+        }
+      }
+    ]
+  }
+}

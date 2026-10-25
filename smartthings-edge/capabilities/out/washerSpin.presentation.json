@@ -1,0 +1,173 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.label}}",
+      "displayType": "list",
+      "list": {
+        "command": {
+          "name": "setSpin",
+          "alternatives": [
+            {
+              "key": "rinseHold",
+              "value": "{{i18n.attributes.spin.i18n.value.rinseHold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "noSpin",
+              "value": "{{i18n.attributes.spin.i18n.value.noSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "400",
+              "value": "{{i18n.attributes.spin.i18n.value.400.label}}",
+              "type": "active"
+            },
+            {
+              "key": "800",
+              "value": "{{i18n.attributes.spin.i18n.value.800.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1200",
+              "value": "{{i18n.attributes.spin.i18n.value.1200.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1400",
+              "value": "{{i18n.attributes.spin.i18n.value.1400.label}}",
+              "type": "active"
+            }
+          ],
+          "supportedValues": "supportedSpins.value"
+        },
+        "state": {
+          "value": "spin.value",
+          "valueType": "string",
+          "alternatives": [
+            {
+              "key": "rinseHold",
+              "value": "{{i18n.attributes.spin.i18n.value.rinseHold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "noSpin",
+              "value": "{{i18n.attributes.spin.i18n.value.noSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "400",
+              "value": "{{i18n.attributes.spin.i18n.value.400.label}}",
+              "type": "active"
+            },
+            {
+              "key": "800",
+              "value": "{{i18n.attributes.spin.i18n.value.800.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1200",
+              "value": "{{i18n.attributes.spin.i18n.value.1200.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1400",
+              "value": "{{i18n.attributes.spin.i18n.value.1400.label}}",
+              "type": "active"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "rinseHold",
+              "value": "{{i18n.attributes.spin.i18n.value.rinseHold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "noSpin",
+              "value": "{{i18n.attributes.spin.i18n.value.noSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "400",
+              "value": "{{i18n.attributes.spin.i18n.value.400.label}}",
+              "type": "active"
+            },
+            {
+              "key": "800",
+              "value": "{{i18n.attributes.spin.i18n.value.800.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1200",
+              "value": "{{i18n.attributes.spin.i18n.value.1200.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1400",
+              "value": "{{i18n.attributes.spin.i18n.value.1400.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "spin.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "{{i18n.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "rinseHold",
+              "value": "{{i18n.attributes.spin.i18n.value.rinseHold.label}}",
+              "type": "active"
+            },
+            {
+              "key": "noSpin",
+              "value": "{{i18n.attributes.spin.i18n.value.noSpin.label}}",
+              "type": "active"
+            },
+            {
+              "key": "400",
+              "value": "{{i18n.attributes.spin.i18n.value.400.label}}",
+              "type": "active"
+            },
+            {
+              "key": "800",
+              "value": "{{i18n.attributes.spin.i18n.value.800.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1200",
+              "value": "{{i18n.attributes.spin.i18n.value.1200.label}}",
+              "type": "active"
+            },
+            {
+              "key": "1400",
+              "value": "{{i18n.attributes.spin.i18n.value.1400.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setSpin",
+          "argumentType": "string",
+          "supportedValues": "supportedSpins.value"
+        }
+      }
+    ]
+  }
+}

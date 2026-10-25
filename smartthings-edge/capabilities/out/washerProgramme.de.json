@@ -1,0 +1,80 @@
+{
+  "tag": "de",
+  "label": "Programm",
+  "attributes": {
+    "programme": {
+      "label": "Programm",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "SmartWash": {
+            "label": "Smart Wash"
+          },
+          "Cotton": {
+            "label": "Baumwolle"
+          },
+          "Synthetics": {
+            "label": "Pflegeleicht"
+          },
+          "Denim": {
+            "label": "Jeans"
+          },
+          "DarkGarment": {
+            "label": "Dunkle Wäsche"
+          },
+          "SuperSpeed": {
+            "label": "Super Speed"
+          },
+          "SuperEcoWash": {
+            "label": "Eco"
+          },
+          "OutdoorCare": {
+            "label": "Outdoor"
+          },
+          "BabyCare": {
+            "label": "Babypflege"
+          },
+          "Wool": {
+            "label": "Wolle"
+          },
+          "DelicatesWash": {
+            "label": "Feinwäsche"
+          },
+          "Bedding1": {
+            "label": "Bettwäsche"
+          },
+          "Spin": {
+            "label": "Schleudern"
+          },
+          "RinseSpin": {
+            "label": "Spülen + Schleudern"
+          },
+          "EcoDrumClean": {
+            "label": "Trommelreinigung"
+          },
+          "DiningKitchenwork": {
+            "label": "Küche"
+          },
+          "Gardening": {
+            "label": "Garten"
+          },
+          "HygieneCare": {
+            "label": "Hygiene+"
+          },
+          "ActiveSports": {
+            "label": "Sport"
+          },
+          "ActiveKids": {
+            "label": "Kinder"
+          },
+          "DeskOffice": {
+            "label": "Täglich"
+          },
+          "CottonEco": {
+            "label": "e-Baumwolle"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,50 @@
+name: samsung-washer-drc
+components:
+  - id: main
+    capabilities:
+      - id: washerOperatingState
+        version: 1
+      - id: perfectforest07855.washerRemainingTime
+        version: 1
+      - id: perfectforest07855.washerProgramme
+        version: 1
+      - id: perfectforest07855.washerTemperature
+        version: 1
+      - id: perfectforest07855.washerSpin
+        version: 1
+      - id: perfectforest07855.washerRinse
+        version: 1
+      - id: remoteControlStatus
+        version: 1
+      - id: refresh
+        version: 1
+    categories:
+      - name: Washer
+metadata:
+  ocfDeviceType: oic.d.washer
+  # capabilities/device-config.json: state and remaining time on the tile, like the dryer
+  vid: 57446b21-63ee-3516-9442-f84b2dce004c
+  mnmn: SmartThingsCommunity
+preferences:
+  - name: ipAddress
+    title: "Washer IP address (optional)"
+    description: "Leave empty: the washer is found automatically"
+    required: false
+    preferenceType: string
+    definition:
+      stringType: text
+  - name: pollSeconds
+    title: "Polling interval (s)"
+    required: false
+    preferenceType: integer
+    definition:
+      minimum: 10
+      maximum: 600
+      default: 30
+  - name: pairNow
+    title: "Pair now"
+    description: "Turn on, then turn Smart Control off and on again at the washer within 3 minutes"
+    required: false
+    preferenceType: boolean
+    definition:
+      default: false

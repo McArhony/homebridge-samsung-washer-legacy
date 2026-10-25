@@ -1,0 +1,32 @@
+{
+  "tag": "es",
+  "label": "Centrifugado",
+  "attributes": {
+    "spin": {
+      "label": "Centrifugado",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "rinseHold": {
+            "label": "Retener aclarado"
+          },
+          "noSpin": {
+            "label": "Sin centrifugado"
+          },
+          "400": {
+            "label": "400 rpm"
+          },
+          "800": {
+            "label": "800 rpm"
+          },
+          "1200": {
+            "label": "1200 rpm"
+          },
+          "1400": {
+            "label": "1400 rpm"
+          }
+        }
+      }
+    }
+  }
+}

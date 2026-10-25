@@ -1,0 +1,77 @@
+{
+  "name": "Washer Spin",
+  "attributes": {
+    "spin": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "rinseHold",
+              "noSpin",
+              "400",
+              "800",
+              "1200",
+              "1400"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "setter": "setSpin",
+      "enumCommands": []
+    },
+    "supportedSpins": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "rinseHold",
+                "noSpin",
+                "400",
+                "800",
+                "1200",
+                "1400"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": []
+    }
+  },
+  "commands": {
+    "setSpin": {
+      "name": "setSpin",
+      "arguments": [
+        {
+          "name": "value",
+          "optional": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "rinseHold",
+              "noSpin",
+              "400",
+              "800",
+              "1200",
+              "1400"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

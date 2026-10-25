@@ -1,0 +1,80 @@
+{
+  "name": "Washer Temperature",
+  "attributes": {
+    "temperature": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "none",
+              "cold",
+              "20",
+              "30",
+              "40",
+              "60",
+              "95"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "setter": "setTemperature",
+      "enumCommands": []
+    },
+    "supportedTemperatures": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "none",
+                "cold",
+                "20",
+                "30",
+                "40",
+                "60",
+                "95"
+              ]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": []
+    }
+  },
+  "commands": {
+    "setTemperature": {
+      "name": "setTemperature",
+      "arguments": [
+        {
+          "name": "value",
+          "optional": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "none",
+              "cold",
+              "20",
+              "30",
+              "40",
+              "60",
+              "95"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
