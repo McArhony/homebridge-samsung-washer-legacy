@@ -500,6 +500,12 @@ local function toggle_handler(attribute, what, allowed_during_cycle)
       refresh(driver, device) -- puts the current value back in the app
       return
     end
+    -- Smart Control is always required, even for child lock during a cycle.
+    if not device:get_field("smart_control") then
+      device.log.warn(what .. " refused: turn Smart Control on at the washer")
+      refresh(driver, device)
+      return
+    end
     if not allowed_during_cycle and refuse_during_cycle(driver, device, what .. " change") then return end
     local value = command.args.value == "enabled" and "Enable" or "Disable"
     local washer, ok, err = washer_for(device), nil, "washer not found yet"
