@@ -1,0 +1,20 @@
+{
+  "tag": "de",
+  "label": "Kindersicherung",
+  "attributes": {
+    "childLock": {
+      "label": "Kindersicherung",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Ein"
+          },
+          "disabled": {
+            "label": "Aus"
+          }
+        }
+      }
+    }
+  }
+}

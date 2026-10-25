@@ -31,6 +31,17 @@ local temperatureCap = capabilities[NS .. ".washerTemperature"]
 local spinCap = capabilities[NS .. ".washerSpin"]
 local rinseCap = capabilities[NS .. ".washerRinse"]
 local remainingCap = capabilities[NS .. ".washerRemainingTime"]
+local dispenserCap = capabilities[NS .. ".washerDispenser"]
+local alertsCap = capabilities[NS .. ".washerAlerts"]
+local childLockCap = capabilities[NS .. ".washerChildLock"]
+
+-- Machine values → capability values for the dispenser, alerts and child lock.
+local ON_OFF = { enable = "enabled", disable = "disabled", notused = "unavailable" }
+local LEVELS = { normal = "normal", low = "low", empty = "empty" }
+local function lower(v) return (v or ""):lower() end
+local function on_off(v) return ON_OFF[lower(v)] or "unavailable" end
+local function level(v) return LEVELS[lower(v)] or "unknown" end
+local function alert(v) return lower(v) == "on" and "alert" or "ok" end
 
 -- A stop counts as the end of a cycle only when it was nearly over, not a
 -- cancel or a Wi-Fi drop; "finish" then stays until the next start.
@@ -144,6 +155,29 @@ local function track_finish(device, state, job, left)
   return job
 end
 
+local function emit_extras(device, v)
+  local auto_detergent, auto_softener = on_off(v.WM_FUN_AUTO_DETERGENT), on_off(v.WM_FUN_AUTO_SOFTENER)
+  emit_changed(device, "autoDetergent", auto_detergent, dispenserCap.autoDetergent(auto_detergent))
+  emit_changed(device, "autoSoftener", auto_softener, dispenserCap.autoSoftener(auto_softener))
+  local detergent, softener = level(v.WM_FUN_DETERGENT_INFO), level(v.WM_FUN_SOFTENER_INFO)
+  emit_changed(device, "detergentLevel", detergent, dispenserCap.detergentLevel(detergent))
+  emit_changed(device, "softenerLevel", softener, dispenserCap.softenerLevel(softener))
+  local drawer = lower(v.WM_FUN_DISPENSER_OPEN) == "open" and "open" or "closed"
+  emit_changed(device, "drawer", drawer, dispenserCap.drawer(drawer))
+
+  local drum, filter = alert(v.WM_FUN_DRUM_CLEAN), alert(v.WM_FUN_FILTER_ALARM)
+  emit_changed(device, "drumClean", drum, alertsCap.drumClean(drum))
+  emit_changed(device, "filter", filter, alertsCap.filter(filter))
+  local hot, fault = alert(v.WM_FUN_HOT_WARNING), alert(v.WM_FUN_DISPENSER_ABNORMAL)
+  emit_changed(device, "hotDoor", hot, alertsCap.hotDoor(hot))
+  emit_changed(device, "dispenserFault", fault, alertsCap.dispenserFault(fault))
+  local error_code = (v.WM_FUN_ERROR and v.WM_FUN_ERROR ~= "") and v.WM_FUN_ERROR or "Normal"
+  emit_changed(device, "error", error_code, alertsCap.error(error_code))
+
+  local lock = lower(v.WM_FUN_CHILD_LOCK) == "enable" and "enabled" or "disabled"
+  emit_changed(device, "childLock", lock, childLockCap.childLock(lock))
+end
+
 local function emit_state(device, v)
   local state = machine_state(v.WM_FUN_OPERATION)
   device:emit_event(washerOperatingState.machineState(state))
@@ -176,6 +210,7 @@ local function emit_state(device, v)
   device:emit_event(remoteControlStatus.remoteControlEnabled(smart and "true" or "false"))
 
   emit_settings(device, v)
+  emit_extras(device, v)
 end
 
 local refresh
@@ -307,6 +342,21 @@ local function setting_handler(setting)
   end
 end
 
+-- Dispenser and child lock: one attribute, "enabled" → Enable, "disabled" → Disable.
+local function toggle_handler(attribute, what)
+  return function(driver, device, command)
+    local value = command.args.value == "enabled" and "Enable" or "Disable"
+    local washer, ok, err = washer_for(device), nil, "washer not found yet"
+    if washer then ok, err = washer:control(attribute, value) end
+    if ok then
+      device.log.info(string.format("%s: %s", what, value))
+    else
+      device.log.warn(string.format("%s refused (%s) — is Smart Control on?", what, tostring(err)))
+    end
+    device.thread:call_with_delay(2, function() refresh(driver, device) end)
+  end
+end
+
 local function device_init(driver, device)
   device:emit_event(washerOperatingState.supportedMachineStates({ "run", "pause", "stop" }))
   refresh(driver, device)
@@ -365,6 +415,13 @@ local driver = Driver("samsung-washer-legacy", {
     },
     [rinseCap.ID] = {
       [rinseCap.commands.setRinse.NAME] = setting_handler("rinse"),
+    },
+    [dispenserCap.ID] = {
+      [dispenserCap.commands.setAutoDetergent.NAME] = toggle_handler("WM_FUN_AUTO_DETERGENT", "auto detergent"),
+      [dispenserCap.commands.setAutoSoftener.NAME] = toggle_handler("WM_FUN_AUTO_SOFTENER", "auto softener"),
+    },
+    [childLockCap.ID] = {
+      [childLockCap.commands.setChildLock.NAME] = toggle_handler("WM_FUN_CHILD_LOCK", "child lock"),
     },
     [capabilities.refresh.ID] = {
       [capabilities.refresh.commands.refresh.NAME] = refresh,

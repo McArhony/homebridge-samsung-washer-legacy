@@ -1,0 +1,66 @@
+{
+  "tag": "fr",
+  "label": "Entretien",
+  "attributes": {
+    "drumClean": {
+      "label": "Nettoyage du tambour",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "À faire"
+          }
+        }
+      }
+    },
+    "filter": {
+      "label": "Filtre",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "À vérifier"
+          }
+        }
+      }
+    },
+    "hotDoor": {
+      "label": "Porte chaude",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "Non"
+          },
+          "alert": {
+            "label": "Attention, chaude"
+          }
+        }
+      }
+    },
+    "dispenserFault": {
+      "label": "Anomalie du distributeur",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "À vérifier"
+          }
+        }
+      }
+    },
+    "error": {
+      "label": "Erreur",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    }
+  }
+}

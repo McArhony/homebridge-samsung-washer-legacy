@@ -1,0 +1,66 @@
+{
+  "tag": "es",
+  "label": "Mantenimiento",
+  "attributes": {
+    "drumClean": {
+      "label": "Limpieza del tambor",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Pendiente"
+          }
+        }
+      }
+    },
+    "filter": {
+      "label": "Filtro",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Revisar"
+          }
+        }
+      }
+    },
+    "hotDoor": {
+      "label": "Puerta caliente",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "No"
+          },
+          "alert": {
+            "label": "Cuidado, caliente"
+          }
+        }
+      }
+    },
+    "dispenserFault": {
+      "label": "Fallo del dosificador",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Revisar"
+          }
+        }
+      }
+    },
+    "error": {
+      "label": "Error",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    }
+  }
+}

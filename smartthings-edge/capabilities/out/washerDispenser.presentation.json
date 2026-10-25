@@ -1,0 +1,345 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.attributes.autoDetergent.label}}",
+      "displayType": "list",
+      "list": {
+        "command": {
+          "name": "setAutoDetergent",
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ]
+        },
+        "state": {
+          "value": "autoDetergent.value",
+          "valueType": "string",
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.disabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "unavailable",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.unavailable.label}}",
+              "type": "active"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "{{i18n.attributes.autoSoftener.label}}",
+      "displayType": "list",
+      "list": {
+        "command": {
+          "name": "setAutoSoftener",
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ]
+        },
+        "state": {
+          "value": "autoSoftener.value",
+          "valueType": "string",
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.disabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "unavailable",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.unavailable.label}}",
+              "type": "active"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "label": "{{i18n.attributes.detergentLevel.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{detergentLevel.value}}",
+        "alternatives": [
+          {
+            "key": "normal",
+            "value": "{{i18n.attributes.detergentLevel.i18n.value.normal.label}}",
+            "type": "active"
+          },
+          {
+            "key": "low",
+            "value": "{{i18n.attributes.detergentLevel.i18n.value.low.label}}",
+            "type": "active"
+          },
+          {
+            "key": "empty",
+            "value": "{{i18n.attributes.detergentLevel.i18n.value.empty.label}}",
+            "type": "active"
+          },
+          {
+            "key": "unknown",
+            "value": "{{i18n.attributes.detergentLevel.i18n.value.unknown.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    },
+    {
+      "label": "{{i18n.attributes.softenerLevel.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{softenerLevel.value}}",
+        "alternatives": [
+          {
+            "key": "normal",
+            "value": "{{i18n.attributes.softenerLevel.i18n.value.normal.label}}",
+            "type": "active"
+          },
+          {
+            "key": "low",
+            "value": "{{i18n.attributes.softenerLevel.i18n.value.low.label}}",
+            "type": "active"
+          },
+          {
+            "key": "empty",
+            "value": "{{i18n.attributes.softenerLevel.i18n.value.empty.label}}",
+            "type": "active"
+          },
+          {
+            "key": "unknown",
+            "value": "{{i18n.attributes.softenerLevel.i18n.value.unknown.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    },
+    {
+      "label": "{{i18n.attributes.drawer.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{drawer.value}}",
+        "alternatives": [
+          {
+            "key": "closed",
+            "value": "{{i18n.attributes.drawer.i18n.value.closed.label}}",
+            "type": "active"
+          },
+          {
+            "key": "open",
+            "value": "{{i18n.attributes.drawer.i18n.value.open.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.attributes.autoDetergent.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.disabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "unavailable",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.unavailable.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "autoDetergent.value",
+          "valueType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.autoSoftener.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.disabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "unavailable",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.unavailable.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "autoSoftener.value",
+          "valueType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.detergentLevel.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "normal",
+              "value": "{{i18n.attributes.detergentLevel.i18n.value.normal.label}}",
+              "type": "active"
+            },
+            {
+              "key": "low",
+              "value": "{{i18n.attributes.detergentLevel.i18n.value.low.label}}",
+              "type": "active"
+            },
+            {
+              "key": "empty",
+              "value": "{{i18n.attributes.detergentLevel.i18n.value.empty.label}}",
+              "type": "active"
+            },
+            {
+              "key": "unknown",
+              "value": "{{i18n.attributes.detergentLevel.i18n.value.unknown.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "detergentLevel.value",
+          "valueType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.softenerLevel.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "normal",
+              "value": "{{i18n.attributes.softenerLevel.i18n.value.normal.label}}",
+              "type": "active"
+            },
+            {
+              "key": "low",
+              "value": "{{i18n.attributes.softenerLevel.i18n.value.low.label}}",
+              "type": "active"
+            },
+            {
+              "key": "empty",
+              "value": "{{i18n.attributes.softenerLevel.i18n.value.empty.label}}",
+              "type": "active"
+            },
+            {
+              "key": "unknown",
+              "value": "{{i18n.attributes.softenerLevel.i18n.value.unknown.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "softenerLevel.value",
+          "valueType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.drawer.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "closed",
+              "value": "{{i18n.attributes.drawer.i18n.value.closed.label}}",
+              "type": "active"
+            },
+            {
+              "key": "open",
+              "value": "{{i18n.attributes.drawer.i18n.value.open.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "drawer.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "{{i18n.attributes.autoDetergent.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoDetergent.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setAutoDetergent",
+          "argumentType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.autoSoftener.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.autoSoftener.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setAutoSoftener",
+          "argumentType": "string"
+        }
+      }
+    ]
+  }
+}

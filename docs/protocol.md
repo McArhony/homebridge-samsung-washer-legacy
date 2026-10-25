@@ -60,6 +60,14 @@ The washer also pushes `<Update Type="Status">` messages after every change.
 | `WM_FUN_CHILD_LOCK`, `WM_FUN_ERROR`, `WM_FUN_POWER` (read only) | |
 | `WM_FUN_QUICK_WASH` | Express: 60/50/40/30/20/15/Off (read only) |
 | `WM_FUN_EASY_IRON` | Easy iron (read only) |
+| `WM_FUN_AUTO_DETERGENT`, `WM_FUN_AUTO_SOFTENER` | auto dispenser: `Enable` / `Disable` (`NotUsed` for some programmes); **writable**, checked |
+| `WM_FUN_DETERGENT_INFO`, `WM_FUN_SOFTENER_INFO` | tank levels (`Normal` seen; other values not seen yet) |
+| `WM_FUN_DISPENSER_OPEN`, `WM_FUN_DISPENSER_ABNORMAL` | drawer `Open` / `Close`; dispenser fault `On` / `Off` |
+| `WM_FUN_DRUM_CLEAN`, `WM_FUN_FILTER_ALARM`, `WM_FUN_HOT_WARNING` | maintenance alerts, `On` / `Off` |
+| `WM_FUN_CHILD_LOCK` | `Enable` / `Disable`; **writable**, checked |
+
+The washer publishes 42 attributes in all; anything not in its `DeviceState` list (drum light,
+intensive, pre-wash, soak…) is not available on the network.
 
 A delayed end armed on the panel shows as `WM_FUN_OPERATION=Start` + `WM_FUN_PROGRESS=Delaywash`.
 Not seen yet: the phase name at the very end of a cycle.

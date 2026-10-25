@@ -1,0 +1,66 @@
+{
+  "tag": "it",
+  "label": "Manutenzione",
+  "attributes": {
+    "drumClean": {
+      "label": "Pulizia cestello",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Da fare"
+          }
+        }
+      }
+    },
+    "filter": {
+      "label": "Filtro",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Da controllare"
+          }
+        }
+      }
+    },
+    "hotDoor": {
+      "label": "Oblò caldo",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "No"
+          },
+          "alert": {
+            "label": "Attenzione, caldo"
+          }
+        }
+      }
+    },
+    "dispenserFault": {
+      "label": "Guasto dosatore",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Da controllare"
+          }
+        }
+      }
+    },
+    "error": {
+      "label": "Errore",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    }
+  }
+}

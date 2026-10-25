@@ -1,0 +1,43 @@
+{
+  "name": "Washer Child Lock",
+  "attributes": {
+    "childLock": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": [],
+      "setter": "setChildLock"
+    }
+  },
+  "commands": {
+    "setChildLock": {
+      "name": "setChildLock",
+      "arguments": [
+        {
+          "name": "value",
+          "optional": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

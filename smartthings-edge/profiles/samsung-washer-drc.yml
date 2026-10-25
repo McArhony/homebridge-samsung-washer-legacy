@@ -14,6 +14,12 @@ components:
         version: 1
       - id: perfectforest07855.washerRinse
         version: 1
+      - id: perfectforest07855.washerDispenser
+        version: 1
+      - id: perfectforest07855.washerAlerts
+        version: 1
+      - id: perfectforest07855.washerChildLock
+        version: 1
       - id: remoteControlStatus
         version: 1
       - id: refresh
@@ -23,7 +29,7 @@ components:
 metadata:
   ocfDeviceType: oic.d.washer
   # capabilities/device-config.json: state and remaining time on the tile, like the dryer
-  vid: 57446b21-63ee-3516-9442-f84b2dce004c
+  vid: e8015303-d71a-398a-9c3e-67687029d614
   mnmn: SmartThingsCommunity
 preferences:
   - name: ipAddress

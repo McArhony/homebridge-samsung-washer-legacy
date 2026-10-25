@@ -158,6 +158,95 @@ def remaining_translation(lang_index, lang):
     }}
 
 
+# Capabilities with several attributes: (attribute, labels per LANGS, setter or None, values).
+# Values: (key, labels per LANGS). Settable attributes become lists, read-only ones states.
+ON_OFF = [("enabled", "On", "Activé", "Ein", "Activado", "Attivo"),
+          ("disabled", "Off", "Désactivé", "Aus", "Desactivado", "Disattivo"),
+          ("unavailable", "Not used by this programme", "Non utilisé par ce programme",
+           "Bei diesem Programm nicht verwendet", "No se usa en este programa", "Non usato in questo programma")]
+LEVEL = [("normal", "OK", "OK", "OK", "OK", "OK"),
+         ("low", "Low", "Bas", "Niedrig", "Bajo", "Basso"),
+         ("empty", "Empty", "Vide", "Leer", "Vacío", "Vuoto"),
+         ("unknown", "Unknown", "Inconnu", "Unbekannt", "Desconocido", "Sconosciuto")]
+ALERT = [("ok", "OK", "OK", "OK", "OK", "OK"),
+         ("alert", "Needs attention", "À vérifier", "Prüfen", "Revisar", "Da controllare")]
+MULTI = [
+    ("washerDispenser", "Washer Dispenser",
+     ["Auto dispenser", "Distributeur automatique", "Automatische Dosierung", "Dosificador automático", "Dosatore automatico"],
+     [("autoDetergent", ["Auto detergent", "Lessive automatique", "Waschmittel automatisch", "Detergente automático", "Detersivo automatico"], "setAutoDetergent", ON_OFF[:2], ON_OFF),
+      ("autoSoftener", ["Auto softener", "Adoucissant automatique", "Weichspüler automatisch", "Suavizante automático", "Ammorbidente automatico"], "setAutoSoftener", ON_OFF[:2], ON_OFF),
+      ("detergentLevel", ["Detergent tank", "Réservoir de lessive", "Waschmitteltank", "Depósito de detergente", "Serbatoio detersivo"], None, None, LEVEL),
+      ("softenerLevel", ["Softener tank", "Réservoir d'adoucissant", "Weichspülertank", "Depósito de suavizante", "Serbatoio ammorbidente"], None, None, LEVEL),
+      ("drawer", ["Dispenser drawer", "Tiroir à lessive", "Waschmittelschublade", "Cajón del detergente", "Cassetto detersivo"], None, None,
+       [("closed", "Closed", "Fermé", "Geschlossen", "Cerrado", "Chiuso"), ("open", "Open", "Ouvert", "Offen", "Abierto", "Aperto")])]),
+    ("washerAlerts", "Washer Alerts",
+     ["Maintenance", "Entretien", "Wartung", "Mantenimiento", "Manutenzione"],
+     [("drumClean", ["Drum clean", "Nettoyage du tambour", "Trommelreinigung", "Limpieza del tambor", "Pulizia cestello"], None, None,
+       [("ok", "OK", "OK", "OK", "OK", "OK"), ("alert", "Due", "À faire", "Fällig", "Pendiente", "Da fare")]),
+      ("filter", ["Filter", "Filtre", "Filter", "Filtro", "Filtro"], None, None, ALERT),
+      ("hotDoor", ["Hot door", "Porte chaude", "Heiße Tür", "Puerta caliente", "Oblò caldo"], None, None,
+       [("ok", "No", "Non", "Nein", "No", "No"), ("alert", "Careful, hot", "Attention, chaude", "Vorsicht, heiß", "Cuidado, caliente", "Attenzione, caldo")]),
+      ("dispenserFault", ["Dispenser fault", "Anomalie du distributeur", "Dosierstörung", "Fallo del dosificador", "Guasto dosatore"], None, None, ALERT),
+      ("error", ["Error", "Erreur", "Fehler", "Error", "Errore"], None, None, None)]),
+    ("washerChildLock", "Washer Child Lock",
+     ["Child lock", "Sécurité enfant", "Kindersicherung", "Bloqueo infantil", "Blocco bambini"],
+     [("childLock", ["Child lock", "Sécurité enfant", "Kindersicherung", "Bloqueo infantil", "Blocco bambini"], "setChildLock", ON_OFF[:2], ON_OFF[:2])]),
+]
+
+
+def multi_capability(name, fields):
+    attrs, cmds = {}, {}
+    for attr, _labels, setter, settable, values in fields:
+        item = {"type": "string"}
+        if values:
+            item["enum"] = [v[0] for v in values]
+        a = {"schema": {"type": "object", "properties": {"value": item}, "additionalProperties": False,
+                        "required": ["value"]}, "enumCommands": []}
+        if setter:
+            a["setter"] = setter
+            cmds[setter] = {"name": setter, "arguments": [{"name": "value", "optional": False,
+                            "schema": {"type": "string", "enum": [v[0] for v in settable]}}]}
+        attrs[attr] = a
+    return {"name": name, "attributes": attrs, "commands": cmds}
+
+
+def multi_presentation(fields):
+    detail, conditions, actions = [], [], []
+    for attr, _labels, setter, settable, values in fields:
+        label = "{{i18n.attributes.%s.label}}" % attr
+        if values:
+            alts = [{"key": v[0], "value": "{{i18n.attributes.%s.i18n.value.%s.label}}" % (attr, v[0]), "type": "active"}
+                    for v in values]
+            conditions.append({"label": label, "displayType": "list",
+                               "list": {"alternatives": alts, "value": f"{attr}.value", "valueType": "string"}})
+        if setter:
+            cmd_alts = [{"key": v[0], "value": "{{i18n.attributes.%s.i18n.value.%s.label}}" % (attr, v[0]), "type": "active"}
+                        for v in settable]
+            detail.append({"label": label, "displayType": "list", "list": {
+                "command": {"name": setter, "alternatives": cmd_alts},
+                "state": {"value": f"{attr}.value", "valueType": "string", "alternatives": alts}}})
+            actions.append({"label": label, "displayType": "list",
+                            "list": {"alternatives": cmd_alts, "command": setter, "argumentType": "string"}})
+        elif values:
+            # Read-only: a state, its value translated through alternatives.
+            detail.append({"label": label, "displayType": "state",
+                           "state": {"label": "{{%s.value}}" % attr, "alternatives": alts}})
+        else:
+            detail.append({"label": label, "displayType": "state", "state": {"label": "{{%s.value}}" % attr}})
+    return {"dashboard": {"states": [], "actions": []}, "detailView": detail,
+            "automation": {"conditions": conditions, "actions": actions}}
+
+
+def multi_translation(lang_index, lang, cap_labels, fields):
+    attrs = {}
+    for attr, labels, _setter, _settable, values in fields:
+        a = {"label": labels[lang_index], "displayTemplate": "{{device.label}}: {{value}}"}
+        if values:
+            a["i18n"] = {"value": {v[0]: {"label": v[1 + lang_index]} for v in values}}
+        attrs[attr] = a
+    return {"tag": lang, "label": cap_labels[lang_index], "attributes": attrs}
+
+
 def main():
     namespace = sys.argv[1] if len(sys.argv) > 1 else "<namespace>"
     out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out")
@@ -177,7 +266,15 @@ def main():
     for i, lang in enumerate(LANGS):
         with open(os.path.join(out, f"washerRemainingTime.{lang}.json"), "w", encoding="utf-8") as f:
             json.dump(remaining_translation(i, lang), f, indent=2, ensure_ascii=False)
-    print(f"{len(CAPABILITIES) + 1} capabilities generated in {out} (namespace {namespace})")
+    for key, name, cap_labels, fields in MULTI:
+        with open(os.path.join(out, f"{key}.json"), "w", encoding="utf-8") as f:
+            json.dump(multi_capability(name, fields), f, indent=2, ensure_ascii=False)
+        with open(os.path.join(out, f"{key}.presentation.json"), "w", encoding="utf-8") as f:
+            json.dump(multi_presentation(fields), f, indent=2, ensure_ascii=False)
+        for i, lang in enumerate(LANGS):
+            with open(os.path.join(out, f"{key}.{lang}.json"), "w", encoding="utf-8") as f:
+                json.dump(multi_translation(i, lang, cap_labels, fields), f, indent=2, ensure_ascii=False)
+    print(f"{len(CAPABILITIES) + 1 + len(MULTI)} capabilities generated in {out} (namespace {namespace})")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,20 @@
+{
+  "tag": "it",
+  "label": "Blocco bambini",
+  "attributes": {
+    "childLock": {
+      "label": "Blocco bambini",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Attivo"
+          },
+          "disabled": {
+            "label": "Disattivo"
+          }
+        }
+      }
+    }
+  }
+}

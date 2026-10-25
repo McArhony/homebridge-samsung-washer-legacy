@@ -1,0 +1,94 @@
+{
+  "tag": "it",
+  "label": "Dosatore automatico",
+  "attributes": {
+    "autoDetergent": {
+      "label": "Detersivo automatico",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Attivo"
+          },
+          "disabled": {
+            "label": "Disattivo"
+          },
+          "unavailable": {
+            "label": "Non usato in questo programma"
+          }
+        }
+      }
+    },
+    "autoSoftener": {
+      "label": "Ammorbidente automatico",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Attivo"
+          },
+          "disabled": {
+            "label": "Disattivo"
+          },
+          "unavailable": {
+            "label": "Non usato in questo programma"
+          }
+        }
+      }
+    },
+    "detergentLevel": {
+      "label": "Serbatoio detersivo",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Basso"
+          },
+          "empty": {
+            "label": "Vuoto"
+          },
+          "unknown": {
+            "label": "Sconosciuto"
+          }
+        }
+      }
+    },
+    "softenerLevel": {
+      "label": "Serbatoio ammorbidente",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Basso"
+          },
+          "empty": {
+            "label": "Vuoto"
+          },
+          "unknown": {
+            "label": "Sconosciuto"
+          }
+        }
+      }
+    },
+    "drawer": {
+      "label": "Cassetto detersivo",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "closed": {
+            "label": "Chiuso"
+          },
+          "open": {
+            "label": "Aperto"
+          }
+        }
+      }
+    }
+  }
+}

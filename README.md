@@ -14,6 +14,7 @@ Samsung's cloud.
 | State, phase, remaining time, end of cycle | ✅ | ✅ state and remaining time; end-of-cycle sensor not checked on a real wash |
 | Start, pause, resume, cancel | ✅ | ✅ start / pause (or cancel) |
 | Programme, temperature, spin, rinses | ✅ | ❌ |
+| Auto dispenser (detergent, softener), tank levels, child lock, maintenance alerts | ✅ | ❌ |
 | Languages | English, French, German, Spanish, Italian | English |
 | Guide | **[docs/smartthings.md](docs/smartthings.md)** | [docs/homebridge.md](docs/homebridge.md) |
 

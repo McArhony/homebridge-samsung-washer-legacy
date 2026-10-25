@@ -4,7 +4,9 @@ This guide installs the driver on **your own** SmartThings hub. No programming n
 a few commands. Count 30 to 45 minutes the first time.
 
 At the end, your washer appears in the SmartThings app with its state, remaining time, start /
-pause / cancel, and its programme, temperature, spin and rinses.
+pause / cancel, its programme, temperature, spin and rinses, the auto dispenser (detergent and
+softener on/off, tank levels, drawer), the child lock and maintenance alerts (drum clean, filter,
+hot door, errors).
 
 ## What you need
 

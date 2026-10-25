@@ -1,0 +1,176 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.attributes.drumClean.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{drumClean.value}}",
+        "alternatives": [
+          {
+            "key": "ok",
+            "value": "{{i18n.attributes.drumClean.i18n.value.ok.label}}",
+            "type": "active"
+          },
+          {
+            "key": "alert",
+            "value": "{{i18n.attributes.drumClean.i18n.value.alert.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    },
+    {
+      "label": "{{i18n.attributes.filter.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{filter.value}}",
+        "alternatives": [
+          {
+            "key": "ok",
+            "value": "{{i18n.attributes.filter.i18n.value.ok.label}}",
+            "type": "active"
+          },
+          {
+            "key": "alert",
+            "value": "{{i18n.attributes.filter.i18n.value.alert.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    },
+    {
+      "label": "{{i18n.attributes.hotDoor.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{hotDoor.value}}",
+        "alternatives": [
+          {
+            "key": "ok",
+            "value": "{{i18n.attributes.hotDoor.i18n.value.ok.label}}",
+            "type": "active"
+          },
+          {
+            "key": "alert",
+            "value": "{{i18n.attributes.hotDoor.i18n.value.alert.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    },
+    {
+      "label": "{{i18n.attributes.dispenserFault.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{dispenserFault.value}}",
+        "alternatives": [
+          {
+            "key": "ok",
+            "value": "{{i18n.attributes.dispenserFault.i18n.value.ok.label}}",
+            "type": "active"
+          },
+          {
+            "key": "alert",
+            "value": "{{i18n.attributes.dispenserFault.i18n.value.alert.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    },
+    {
+      "label": "{{i18n.attributes.error.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{error.value}}"
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.attributes.drumClean.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "ok",
+              "value": "{{i18n.attributes.drumClean.i18n.value.ok.label}}",
+              "type": "active"
+            },
+            {
+              "key": "alert",
+              "value": "{{i18n.attributes.drumClean.i18n.value.alert.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "drumClean.value",
+          "valueType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.filter.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "ok",
+              "value": "{{i18n.attributes.filter.i18n.value.ok.label}}",
+              "type": "active"
+            },
+            {
+              "key": "alert",
+              "value": "{{i18n.attributes.filter.i18n.value.alert.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "filter.value",
+          "valueType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.hotDoor.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "ok",
+              "value": "{{i18n.attributes.hotDoor.i18n.value.ok.label}}",
+              "type": "active"
+            },
+            {
+              "key": "alert",
+              "value": "{{i18n.attributes.hotDoor.i18n.value.alert.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "hotDoor.value",
+          "valueType": "string"
+        }
+      },
+      {
+        "label": "{{i18n.attributes.dispenserFault.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "ok",
+              "value": "{{i18n.attributes.dispenserFault.i18n.value.ok.label}}",
+              "type": "active"
+            },
+            {
+              "key": "alert",
+              "value": "{{i18n.attributes.dispenserFault.i18n.value.alert.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "dispenserFault.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": []
+  }
+}

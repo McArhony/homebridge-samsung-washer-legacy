@@ -1,0 +1,94 @@
+{
+  "tag": "en",
+  "label": "Auto dispenser",
+  "attributes": {
+    "autoDetergent": {
+      "label": "Auto detergent",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "On"
+          },
+          "disabled": {
+            "label": "Off"
+          },
+          "unavailable": {
+            "label": "Not used by this programme"
+          }
+        }
+      }
+    },
+    "autoSoftener": {
+      "label": "Auto softener",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "On"
+          },
+          "disabled": {
+            "label": "Off"
+          },
+          "unavailable": {
+            "label": "Not used by this programme"
+          }
+        }
+      }
+    },
+    "detergentLevel": {
+      "label": "Detergent tank",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Low"
+          },
+          "empty": {
+            "label": "Empty"
+          },
+          "unknown": {
+            "label": "Unknown"
+          }
+        }
+      }
+    },
+    "softenerLevel": {
+      "label": "Softener tank",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Low"
+          },
+          "empty": {
+            "label": "Empty"
+          },
+          "unknown": {
+            "label": "Unknown"
+          }
+        }
+      }
+    },
+    "drawer": {
+      "label": "Dispenser drawer",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "closed": {
+            "label": "Closed"
+          },
+          "open": {
+            "label": "Open"
+          }
+        }
+      }
+    }
+  }
+}

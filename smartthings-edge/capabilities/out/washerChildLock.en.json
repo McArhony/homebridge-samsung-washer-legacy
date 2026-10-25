@@ -1,0 +1,20 @@
+{
+  "tag": "en",
+  "label": "Child lock",
+  "attributes": {
+    "childLock": {
+      "label": "Child lock",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "On"
+          },
+          "disabled": {
+            "label": "Off"
+          }
+        }
+      }
+    }
+  }
+}

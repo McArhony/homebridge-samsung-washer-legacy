@@ -1,0 +1,66 @@
+{
+  "tag": "de",
+  "label": "Wartung",
+  "attributes": {
+    "drumClean": {
+      "label": "Trommelreinigung",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Fällig"
+          }
+        }
+      }
+    },
+    "filter": {
+      "label": "Filter",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Prüfen"
+          }
+        }
+      }
+    },
+    "hotDoor": {
+      "label": "Heiße Tür",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "Nein"
+          },
+          "alert": {
+            "label": "Vorsicht, heiß"
+          }
+        }
+      }
+    },
+    "dispenserFault": {
+      "label": "Dosierstörung",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "OK"
+          },
+          "alert": {
+            "label": "Prüfen"
+          }
+        }
+      }
+    },
+    "error": {
+      "label": "Fehler",
+      "displayTemplate": "{{device.label}}: {{value}}"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "tag": "de",
+  "label": "Automatische Dosierung",
+  "attributes": {
+    "autoDetergent": {
+      "label": "Waschmittel automatisch",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Ein"
+          },
+          "disabled": {
+            "label": "Aus"
+          },
+          "unavailable": {
+            "label": "Bei diesem Programm nicht verwendet"
+          }
+        }
+      }
+    },
+    "autoSoftener": {
+      "label": "Weichspüler automatisch",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Ein"
+          },
+          "disabled": {
+            "label": "Aus"
+          },
+          "unavailable": {
+            "label": "Bei diesem Programm nicht verwendet"
+          }
+        }
+      }
+    },
+    "detergentLevel": {
+      "label": "Waschmitteltank",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Niedrig"
+          },
+          "empty": {
+            "label": "Leer"
+          },
+          "unknown": {
+            "label": "Unbekannt"
+          }
+        }
+      }
+    },
+    "softenerLevel": {
+      "label": "Weichspülertank",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Niedrig"
+          },
+          "empty": {
+            "label": "Leer"
+          },
+          "unknown": {
+            "label": "Unbekannt"
+          }
+        }
+      }
+    },
+    "drawer": {
+      "label": "Waschmittelschublade",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "closed": {
+            "label": "Geschlossen"
+          },
+          "open": {
+            "label": "Offen"
+          }
+        }
+      }
+    }
+  }
+}

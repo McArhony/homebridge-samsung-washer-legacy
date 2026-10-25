@@ -1,0 +1,94 @@
+{
+  "tag": "es",
+  "label": "Dosificador automático",
+  "attributes": {
+    "autoDetergent": {
+      "label": "Detergente automático",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Activado"
+          },
+          "disabled": {
+            "label": "Desactivado"
+          },
+          "unavailable": {
+            "label": "No se usa en este programa"
+          }
+        }
+      }
+    },
+    "autoSoftener": {
+      "label": "Suavizante automático",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Activado"
+          },
+          "disabled": {
+            "label": "Desactivado"
+          },
+          "unavailable": {
+            "label": "No se usa en este programa"
+          }
+        }
+      }
+    },
+    "detergentLevel": {
+      "label": "Depósito de detergente",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Bajo"
+          },
+          "empty": {
+            "label": "Vacío"
+          },
+          "unknown": {
+            "label": "Desconocido"
+          }
+        }
+      }
+    },
+    "softenerLevel": {
+      "label": "Depósito de suavizante",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Bajo"
+          },
+          "empty": {
+            "label": "Vacío"
+          },
+          "unknown": {
+            "label": "Desconocido"
+          }
+        }
+      }
+    },
+    "drawer": {
+      "label": "Cajón del detergente",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "closed": {
+            "label": "Cerrado"
+          },
+          "open": {
+            "label": "Abierto"
+          }
+        }
+      }
+    }
+  }
+}

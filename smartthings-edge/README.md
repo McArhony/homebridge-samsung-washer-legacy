@@ -14,7 +14,7 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
 | `src/init.lua` | the SmartThings device |
 | `src/secrets/` | **git-ignored**: `ac14k_m.pem`, `ac14k_m.key` (`samsung-washer cert --dir src/secrets`), optional `token.lua` (`return "<token>"`) |
 | `profiles/samsung-washer-drc.yml` | capabilities and settings (optional IP address, polling interval, "Pair now") |
-| `capabilities/build.py` | generates the custom capabilities, presentations and translations into `capabilities/out/` |
+| `capabilities/build.py` | generates the custom capabilities, presentations and translations into `capabilities/out/` (single-value ones in `CAPABILITIES`, multi-attribute ones in `MULTI`) |
 | `capabilities/device-config.json` | device presentation: state and remaining time on the tile, no button |
 | `rules/build_auto_cycle_link.py` | optional washer → dryer rule |
 | `test/` | `lua test/test_drc.lua && lua test/test_course.lua` |
@@ -29,8 +29,10 @@ LAN driver for a SmartThings hub. It talks **directly** to the washer (XML over 
 - Custom capabilities, namespace `perfectforest07855`, translated (English default, French,
   German, Spanish, Italian): `washerProgramme`, `washerTemperature`, `washerSpin`, `washerRinse`
   (only the values the selected programme allows) and `washerRemainingTime` (read only, "1:23",
-  on the tile). Samsung's own `custom.washer*` capabilities exist, but the app does not show them
-  for a third-party driver.
+  on the tile), `washerDispenser` (auto detergent / softener on-off, tank levels, drawer),
+  `washerAlerts` (drum clean, filter, hot door, dispenser fault, error code) and
+  `washerChildLock`. Samsung's own `custom.washer*` capabilities exist, but the app does not show
+  them for a third-party driver.
 - The washer is found automatically (discovery, then again after 10 failed polls if its address
   changed), unless an address is typed in the settings. Token: `secrets/token.lua` if present,
   otherwise "Pair now" in the settings.
@@ -50,7 +52,8 @@ namespace. To use your own instead:
 
 ```sh
 python3 capabilities/build.py <your-namespace>      # writes capabilities/out/
-# for each capability: washerProgramme, washerTemperature, washerSpin, washerRinse, washerRemainingTime
+# for each capability: washerProgramme, washerTemperature, washerSpin, washerRinse, washerRemainingTime,
+#   washerDispenser, washerAlerts, washerChildLock
 smartthings capabilities:create -i capabilities/out/<cap>.json          # first one creates your namespace
 smartthings capabilities:presentation:create -i capabilities/out/<cap>.presentation.json <ns>.<cap>
 smartthings capabilities:translations:upsert <ns>.<cap> -i capabilities/out/<cap>.<lang>.json   # en fr de es it

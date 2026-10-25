@@ -1,0 +1,94 @@
+{
+  "tag": "fr",
+  "label": "Distributeur automatique",
+  "attributes": {
+    "autoDetergent": {
+      "label": "Lessive automatique",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Activé"
+          },
+          "disabled": {
+            "label": "Désactivé"
+          },
+          "unavailable": {
+            "label": "Non utilisé par ce programme"
+          }
+        }
+      }
+    },
+    "autoSoftener": {
+      "label": "Adoucissant automatique",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "enabled": {
+            "label": "Activé"
+          },
+          "disabled": {
+            "label": "Désactivé"
+          },
+          "unavailable": {
+            "label": "Non utilisé par ce programme"
+          }
+        }
+      }
+    },
+    "detergentLevel": {
+      "label": "Réservoir de lessive",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Bas"
+          },
+          "empty": {
+            "label": "Vide"
+          },
+          "unknown": {
+            "label": "Inconnu"
+          }
+        }
+      }
+    },
+    "softenerLevel": {
+      "label": "Réservoir d'adoucissant",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "normal": {
+            "label": "OK"
+          },
+          "low": {
+            "label": "Bas"
+          },
+          "empty": {
+            "label": "Vide"
+          },
+          "unknown": {
+            "label": "Inconnu"
+          }
+        }
+      }
+    },
+    "drawer": {
+      "label": "Tiroir à lessive",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "closed": {
+            "label": "Fermé"
+          },
+          "open": {
+            "label": "Ouvert"
+          }
+        }
+      }
+    }
+  }
+}

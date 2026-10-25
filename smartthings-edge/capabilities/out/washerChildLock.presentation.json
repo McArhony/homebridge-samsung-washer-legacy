@@ -1,0 +1,91 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.attributes.childLock.label}}",
+      "displayType": "list",
+      "list": {
+        "command": {
+          "name": "setChildLock",
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ]
+        },
+        "state": {
+          "value": "childLock.value",
+          "valueType": "string",
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.attributes.childLock.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "childLock.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": [
+      {
+        "label": "{{i18n.attributes.childLock.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "enabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.enabled.label}}",
+              "type": "active"
+            },
+            {
+              "key": "disabled",
+              "value": "{{i18n.attributes.childLock.i18n.value.disabled.label}}",
+              "type": "active"
+            }
+          ],
+          "command": "setChildLock",
+          "argumentType": "string"
+        }
+      }
+    ]
+  }
+}
