@@ -1,0 +1,47 @@
+{
+  "tag": "es",
+  "label": "Estado",
+  "attributes": {
+    "status": {
+      "label": "Estado",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "Todo bien"
+          },
+          "error": {
+            "label": "Error, ver la lavadora"
+          },
+          "hotDoor": {
+            "label": "Puerta caliente"
+          },
+          "dispenserFault": {
+            "label": "Fallo del dosificador"
+          },
+          "drawerOpen": {
+            "label": "Cajón del detergente abierto"
+          },
+          "detergentEmpty": {
+            "label": "Depósito de detergente vacío"
+          },
+          "detergentLow": {
+            "label": "Depósito de detergente bajo"
+          },
+          "softenerEmpty": {
+            "label": "Depósito de suavizante vacío"
+          },
+          "softenerLow": {
+            "label": "Depósito de suavizante bajo"
+          },
+          "filter": {
+            "label": "Limpiar el filtro"
+          },
+          "drumClean": {
+            "label": "Limpieza del tambor pendiente"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "tag": "it",
+  "label": "Stato",
+  "attributes": {
+    "status": {
+      "label": "Stato",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "Tutto OK"
+          },
+          "error": {
+            "label": "Errore, vedi la lavatrice"
+          },
+          "hotDoor": {
+            "label": "Oblò caldo"
+          },
+          "dispenserFault": {
+            "label": "Guasto dosatore"
+          },
+          "drawerOpen": {
+            "label": "Cassetto detersivo aperto"
+          },
+          "detergentEmpty": {
+            "label": "Serbatoio detersivo vuoto"
+          },
+          "detergentLow": {
+            "label": "Serbatoio detersivo basso"
+          },
+          "softenerEmpty": {
+            "label": "Serbatoio ammorbidente vuoto"
+          },
+          "softenerLow": {
+            "label": "Serbatoio ammorbidente basso"
+          },
+          "filter": {
+            "label": "Pulire il filtro"
+          },
+          "drumClean": {
+            "label": "Pulizia cestello da fare"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "dashboard": {
+    "states": [],
+    "actions": []
+  },
+  "detailView": [
+    {
+      "label": "{{i18n.attributes.status.label}}",
+      "displayType": "state",
+      "state": {
+        "label": "{{status.value}}",
+        "alternatives": [
+          {
+            "key": "ok",
+            "value": "{{i18n.attributes.status.i18n.value.ok.label}}",
+            "type": "active"
+          },
+          {
+            "key": "error",
+            "value": "{{i18n.attributes.status.i18n.value.error.label}}",
+            "type": "active"
+          },
+          {
+            "key": "hotDoor",
+            "value": "{{i18n.attributes.status.i18n.value.hotDoor.label}}",
+            "type": "active"
+          },
+          {
+            "key": "dispenserFault",
+            "value": "{{i18n.attributes.status.i18n.value.dispenserFault.label}}",
+            "type": "active"
+          },
+          {
+            "key": "drawerOpen",
+            "value": "{{i18n.attributes.status.i18n.value.drawerOpen.label}}",
+            "type": "active"
+          },
+          {
+            "key": "detergentEmpty",
+            "value": "{{i18n.attributes.status.i18n.value.detergentEmpty.label}}",
+            "type": "active"
+          },
+          {
+            "key": "detergentLow",
+            "value": "{{i18n.attributes.status.i18n.value.detergentLow.label}}",
+            "type": "active"
+          },
+          {
+            "key": "softenerEmpty",
+            "value": "{{i18n.attributes.status.i18n.value.softenerEmpty.label}}",
+            "type": "active"
+          },
+          {
+            "key": "softenerLow",
+            "value": "{{i18n.attributes.status.i18n.value.softenerLow.label}}",
+            "type": "active"
+          },
+          {
+            "key": "filter",
+            "value": "{{i18n.attributes.status.i18n.value.filter.label}}",
+            "type": "active"
+          },
+          {
+            "key": "drumClean",
+            "value": "{{i18n.attributes.status.i18n.value.drumClean.label}}",
+            "type": "active"
+          }
+        ]
+      }
+    }
+  ],
+  "automation": {
+    "conditions": [
+      {
+        "label": "{{i18n.attributes.status.label}}",
+        "displayType": "list",
+        "list": {
+          "alternatives": [
+            {
+              "key": "ok",
+              "value": "{{i18n.attributes.status.i18n.value.ok.label}}",
+              "type": "active"
+            },
+            {
+              "key": "error",
+              "value": "{{i18n.attributes.status.i18n.value.error.label}}",
+              "type": "active"
+            },
+            {
+              "key": "hotDoor",
+              "value": "{{i18n.attributes.status.i18n.value.hotDoor.label}}",
+              "type": "active"
+            },
+            {
+              "key": "dispenserFault",
+              "value": "{{i18n.attributes.status.i18n.value.dispenserFault.label}}",
+              "type": "active"
+            },
+            {
+              "key": "drawerOpen",
+              "value": "{{i18n.attributes.status.i18n.value.drawerOpen.label}}",
+              "type": "active"
+            },
+            {
+              "key": "detergentEmpty",
+              "value": "{{i18n.attributes.status.i18n.value.detergentEmpty.label}}",
+              "type": "active"
+            },
+            {
+              "key": "detergentLow",
+              "value": "{{i18n.attributes.status.i18n.value.detergentLow.label}}",
+              "type": "active"
+            },
+            {
+              "key": "softenerEmpty",
+              "value": "{{i18n.attributes.status.i18n.value.softenerEmpty.label}}",
+              "type": "active"
+            },
+            {
+              "key": "softenerLow",
+              "value": "{{i18n.attributes.status.i18n.value.softenerLow.label}}",
+              "type": "active"
+            },
+            {
+              "key": "filter",
+              "value": "{{i18n.attributes.status.i18n.value.filter.label}}",
+              "type": "active"
+            },
+            {
+              "key": "drumClean",
+              "value": "{{i18n.attributes.status.i18n.value.drumClean.label}}",
+              "type": "active"
+            }
+          ],
+          "value": "status.value",
+          "valueType": "string"
+        }
+      }
+    ],
+    "actions": []
+  }
+}

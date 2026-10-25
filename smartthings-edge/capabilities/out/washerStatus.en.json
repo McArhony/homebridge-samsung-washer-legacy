@@ -1,0 +1,47 @@
+{
+  "tag": "en",
+  "label": "Status",
+  "attributes": {
+    "status": {
+      "label": "Status",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "All OK"
+          },
+          "error": {
+            "label": "Error, see the washer"
+          },
+          "hotDoor": {
+            "label": "Door hot"
+          },
+          "dispenserFault": {
+            "label": "Dispenser fault"
+          },
+          "drawerOpen": {
+            "label": "Dispenser drawer open"
+          },
+          "detergentEmpty": {
+            "label": "Detergent tank empty"
+          },
+          "detergentLow": {
+            "label": "Detergent tank low"
+          },
+          "softenerEmpty": {
+            "label": "Softener tank empty"
+          },
+          "softenerLow": {
+            "label": "Softener tank low"
+          },
+          "filter": {
+            "label": "Clean the filter"
+          },
+          "drumClean": {
+            "label": "Drum clean due"
+          }
+        }
+      }
+    }
+  }
+}

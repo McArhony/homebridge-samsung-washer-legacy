@@ -1,0 +1,34 @@
+{
+  "name": "Washer Status",
+  "attributes": {
+    "status": {
+      "schema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "error",
+              "hotDoor",
+              "dispenserFault",
+              "drawerOpen",
+              "detergentEmpty",
+              "detergentLow",
+              "softenerEmpty",
+              "softenerLow",
+              "filter",
+              "drumClean"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "value"
+        ]
+      },
+      "enumCommands": []
+    }
+  },
+  "commands": {}
+}

@@ -189,6 +189,23 @@ MULTI = [
        [("ok", "No", "Non", "Nein", "No", "No"), ("alert", "Careful, hot", "Attention, chaude", "Vorsicht, heiß", "Cuidado, caliente", "Attenzione, caldo")]),
       ("dispenserFault", ["Dispenser fault", "Anomalie du distributeur", "Dosierstörung", "Fallo del dosificador", "Guasto dosatore"], None, None, ALERT),
       ("error", ["Error", "Erreur", "Fehler", "Error", "Errore"], None, None, None)]),
+    # One translated line summing up what needs attention (the iOS app puts every
+    # read-only value in a card above the controls: keep that card short).
+    ("washerStatus", "Washer Status",
+     ["Status", "État", "Status", "Estado", "Stato"],
+     [("status", ["Status", "État", "Status", "Estado", "Stato"], None, None, [
+         ("ok", "All OK", "Tout est OK", "Alles OK", "Todo bien", "Tutto OK"),
+         ("error", "Error, see the washer", "Erreur, voir la machine", "Fehler, siehe Gerät", "Error, ver la lavadora", "Errore, vedi la lavatrice"),
+         ("hotDoor", "Door hot", "Porte chaude", "Tür heiß", "Puerta caliente", "Oblò caldo"),
+         ("dispenserFault", "Dispenser fault", "Anomalie du distributeur", "Dosierstörung", "Fallo del dosificador", "Guasto dosatore"),
+         ("drawerOpen", "Dispenser drawer open", "Tiroir à lessive ouvert", "Waschmittelschublade offen", "Cajón del detergente abierto", "Cassetto detersivo aperto"),
+         ("detergentEmpty", "Detergent tank empty", "Réservoir de lessive vide", "Waschmitteltank leer", "Depósito de detergente vacío", "Serbatoio detersivo vuoto"),
+         ("detergentLow", "Detergent tank low", "Réservoir de lessive bas", "Waschmitteltank niedrig", "Depósito de detergente bajo", "Serbatoio detersivo basso"),
+         ("softenerEmpty", "Softener tank empty", "Réservoir d'adoucissant vide", "Weichspülertank leer", "Depósito de suavizante vacío", "Serbatoio ammorbidente vuoto"),
+         ("softenerLow", "Softener tank low", "Réservoir d'adoucissant bas", "Weichspülertank niedrig", "Depósito de suavizante bajo", "Serbatoio ammorbidente basso"),
+         ("filter", "Clean the filter", "Nettoyer le filtre", "Filter reinigen", "Limpiar el filtro", "Pulire il filtro"),
+         ("drumClean", "Drum clean due", "Nettoyage du tambour à faire", "Trommelreinigung fällig", "Limpieza del tambor pendiente", "Pulizia cestello da fare"),
+     ])]),
     ("washerChildLock", "Washer Child Lock",
      ["Child lock", "Sécurité enfant", "Kindersicherung", "Bloqueo infantil", "Blocco bambini"],
      [("childLock", ["Child lock", "Sécurité enfant", "Kindersicherung", "Bloqueo infantil", "Blocco bambini"], "setChildLock", ON_OFF[:2], ON_OFF[:2])]),
@@ -211,7 +228,10 @@ def multi_capability(name, fields):
     return {"name": name, "attributes": attrs, "commands": cmds}
 
 
-def multi_presentation(fields):
+CONTROLS_ONLY_IN_DETAIL = {"washerDispenser"}
+
+
+def multi_presentation(fields, controls_only=False):
     detail, conditions, actions = [], [], []
     for attr, _labels, setter, settable, values in fields:
         label = "{{i18n.attributes.%s.label}}" % attr
@@ -228,6 +248,8 @@ def multi_presentation(fields):
                 "state": {"value": f"{attr}.value", "valueType": "string", "alternatives": alts}}})
             actions.append({"label": label, "displayType": "list",
                             "list": {"alternatives": cmd_alts, "command": setter, "argumentType": "string"}})
+        elif controls_only:
+            continue
         elif values:
             # Read-only: a state, its value translated through alternatives.
             detail.append({"label": label, "displayType": "state",
@@ -271,7 +293,7 @@ def main():
         with open(os.path.join(out, f"{key}.json"), "w", encoding="utf-8") as f:
             json.dump(multi_capability(name, fields), f, indent=2, ensure_ascii=False)
         with open(os.path.join(out, f"{key}.presentation.json"), "w", encoding="utf-8") as f:
-            json.dump(multi_presentation(fields), f, indent=2, ensure_ascii=False)
+            json.dump(multi_presentation(fields, key in CONTROLS_ONLY_IN_DETAIL), f, indent=2, ensure_ascii=False)
         for i, lang in enumerate(LANGS):
             with open(os.path.join(out, f"{key}.{lang}.json"), "w", encoding="utf-8") as f:
                 json.dump(multi_translation(i, lang, cap_labels, fields), f, indent=2, ensure_ascii=False)

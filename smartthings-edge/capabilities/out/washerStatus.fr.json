@@ -1,0 +1,47 @@
+{
+  "tag": "fr",
+  "label": "État",
+  "attributes": {
+    "status": {
+      "label": "État",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "Tout est OK"
+          },
+          "error": {
+            "label": "Erreur, voir la machine"
+          },
+          "hotDoor": {
+            "label": "Porte chaude"
+          },
+          "dispenserFault": {
+            "label": "Anomalie du distributeur"
+          },
+          "drawerOpen": {
+            "label": "Tiroir à lessive ouvert"
+          },
+          "detergentEmpty": {
+            "label": "Réservoir de lessive vide"
+          },
+          "detergentLow": {
+            "label": "Réservoir de lessive bas"
+          },
+          "softenerEmpty": {
+            "label": "Réservoir d'adoucissant vide"
+          },
+          "softenerLow": {
+            "label": "Réservoir d'adoucissant bas"
+          },
+          "filter": {
+            "label": "Nettoyer le filtre"
+          },
+          "drumClean": {
+            "label": "Nettoyage du tambour à faire"
+          }
+        }
+      }
+    }
+  }
+}

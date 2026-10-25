@@ -14,6 +14,8 @@ components:
         version: 1
       - id: perfectforest07855.washerRinse
         version: 1
+      - id: perfectforest07855.washerStatus
+        version: 1
       - id: remoteControlStatus
         version: 1
       - id: perfectforest07855.washerChildLock
@@ -28,8 +30,8 @@ components:
       - name: Washer
 metadata:
   ocfDeviceType: oic.d.washer
-  # capabilities/device-config.json: one line on the tile (phase · % · time), controls first, maintenance last
-  vid: c3eb2467-d348-3b12-85c3-b59739e4c268
+  # capabilities/device-config.json: "Wash · 47%" on the tile; short info card (iOS puts read-only values first), then controls
+  vid: f25acb45-679a-326a-9032-9b1f9d1a5e86
   mnmn: SmartThingsCommunity
 preferences:
   - name: ipAddress

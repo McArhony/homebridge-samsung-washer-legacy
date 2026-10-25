@@ -1,0 +1,47 @@
+{
+  "tag": "de",
+  "label": "Status",
+  "attributes": {
+    "status": {
+      "label": "Status",
+      "displayTemplate": "{{device.label}}: {{value}}",
+      "i18n": {
+        "value": {
+          "ok": {
+            "label": "Alles OK"
+          },
+          "error": {
+            "label": "Fehler, siehe Gerät"
+          },
+          "hotDoor": {
+            "label": "Tür heiß"
+          },
+          "dispenserFault": {
+            "label": "Dosierstörung"
+          },
+          "drawerOpen": {
+            "label": "Waschmittelschublade offen"
+          },
+          "detergentEmpty": {
+            "label": "Waschmitteltank leer"
+          },
+          "detergentLow": {
+            "label": "Waschmitteltank niedrig"
+          },
+          "softenerEmpty": {
+            "label": "Weichspülertank leer"
+          },
+          "softenerLow": {
+            "label": "Weichspülertank niedrig"
+          },
+          "filter": {
+            "label": "Filter reinigen"
+          },
+          "drumClean": {
+            "label": "Trommelreinigung fällig"
+          }
+        }
+      }
+    }
+  }
+}

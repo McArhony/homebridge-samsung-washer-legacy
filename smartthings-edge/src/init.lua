@@ -34,6 +34,7 @@ local remainingCap = capabilities[NS .. ".washerRemainingTime"]
 local dispenserCap = capabilities[NS .. ".washerDispenser"]
 local alertsCap = capabilities[NS .. ".washerAlerts"]
 local childLockCap = capabilities[NS .. ".washerChildLock"]
+local statusCap = capabilities[NS .. ".washerStatus"]
 
 -- Machine values → capability values for the dispenser, alerts and child lock.
 local ON_OFF = { enable = "enabled", disable = "disabled", notused = "unavailable" }
@@ -187,6 +188,20 @@ local function emit_extras(device, v)
 
   local lock = lower(v.WM_FUN_CHILD_LOCK) == "enable" and "enabled" or "disabled"
   emit_changed(device, "childLock", lock, childLockCap.childLock(lock))
+
+  -- One line for the screen: the most important thing needing attention.
+  local status = "ok"
+  if error_code ~= "Normal" then status = "error"
+  elseif hot == "alert" then status = "hotDoor"
+  elseif fault == "alert" then status = "dispenserFault"
+  elseif drawer == "open" then status = "drawerOpen"
+  elseif detergent == "empty" then status = "detergentEmpty"
+  elseif detergent == "low" then status = "detergentLow"
+  elseif softener == "empty" then status = "softenerEmpty"
+  elseif softener == "low" then status = "softenerLow"
+  elseif filter == "alert" then status = "filter"
+  elseif drum == "alert" then status = "drumClean" end
+  emit_changed(device, "status", status, statusCap.status(status))
 end
 
 local function emit_state(device, v)
