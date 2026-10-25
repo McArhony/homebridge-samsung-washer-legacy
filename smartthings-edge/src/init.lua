@@ -116,27 +116,29 @@ local function emit_changed(device, key, value, event)
   device:emit_event(event)
 end
 
-local function emit_settings(device, v)
+-- During a cycle (locked) every list holds only the current value: like on
+-- the washer, settings can only be changed once the cycle is cancelled.
+local function emit_settings(device, v, locked)
   local list = course.parse_option_list(v.WM_FUN_OPT_LIST_INDOOR)
   device:set_field("option_list", list)
   device:set_field("course_option", v.WM_FUN_COURSE_OPTION)
 
-  local names = course.names()
-  emit_changed(device, "programmes", names, programmeCap.supportedProgrammes(names))
   local o = course.decode_option(v.WM_FUN_COURSE_OPTION)
   local programme = (o and course.by_code(o.code)) or course.by_name(v.WM_FUN_COURSE)
+  local names = (locked and programme) and { programme.name } or course.names()
+  emit_changed(device, "programmes", names, programmeCap.supportedProgrammes(names))
   if programme then emit_changed(device, "programme", programme.name, programmeCap.programme(programme.name)) end
   if not o then return end
 
-  local s = course.supported(list[o.code])
+  local temp = course.TEMPERATURES[o.temperature] or "none"
+  local spin = course.SPINS[o.spin] or "rinseHold"
+  local rinse = tostring(math.min(o.rinse, 5))
+  local s = locked and { temperatures = { temp }, spins = { spin }, rinses = { rinse } } or course.supported(list[o.code])
   emit_changed(device, "temps", s.temperatures, temperatureCap.supportedTemperatures(s.temperatures))
   emit_changed(device, "spins", s.spins, spinCap.supportedSpins(s.spins))
   emit_changed(device, "rinses", s.rinses, rinseCap.supportedRinses(s.rinses))
-  local temp = course.TEMPERATURES[o.temperature] or "none"
   emit_changed(device, "temp", temp, temperatureCap.temperature(temp))
-  local spin = course.SPINS[o.spin] or "rinseHold"
   emit_changed(device, "spin", spin, spinCap.spin(spin))
-  local rinse = tostring(math.min(o.rinse, 5))
   emit_changed(device, "rinse", rinse, rinseCap.rinse(rinse))
 end
 
@@ -182,6 +184,7 @@ end
 
 local function emit_state(device, v)
   local state = machine_state(v.WM_FUN_OPERATION)
+  device:set_field("machine_state", state)
   device:emit_event(washerOperatingState.machineState(state))
   local job = job_state(v.WM_FUN_PROGRESS)
   if job == "none" and v.WM_FUN_PROGRESS and v.WM_FUN_PROGRESS ~= "NULL" then
@@ -228,7 +231,7 @@ local function emit_state(device, v)
   local smart = (v.WM_FUN_SMARTCONTROL or ""):lower() == "on"
   device:emit_event(remoteControlStatus.remoteControlEnabled(smart and "true" or "false"))
 
-  emit_settings(device, v)
+  emit_settings(device, v, state ~= "stop")
   emit_extras(device, v)
 end
 
@@ -334,7 +337,17 @@ local function write_option(driver, device, value, what)
   device.thread:call_with_delay(2, function() refresh(driver, device) end)
 end
 
+-- Programme, settings and dispenser can only change when the washer is stopped.
+local function refuse_during_cycle(driver, device, what)
+  local state = device:get_field("machine_state")
+  if state == nil or state == "stop" then return false end
+  device.log.warn(string.format("%s refused: a cycle is %s; cancel it first", what, state == "pause" and "paused" or "running"))
+  refresh(driver, device) -- puts the current value back in the app
+  return true
+end
+
 local function set_programme(driver, device, command)
+  if refuse_during_cycle(driver, device, "programme change") then return end
   local programme = course.by_name(command.args.value)
   local list = device:get_field("option_list") or {}
   local entry = programme and list[programme.code]
@@ -347,6 +360,7 @@ end
 
 local function setting_handler(setting)
   return function(driver, device, command)
+    if refuse_during_cycle(driver, device, setting .. " change") then return end
     local value = command.args.value
     local current = device:get_field("course_option")
     local o = course.decode_option(current)
@@ -362,8 +376,9 @@ local function setting_handler(setting)
 end
 
 -- Dispenser and child lock: one attribute, "enabled" → Enable, "disabled" → Disable.
-local function toggle_handler(attribute, what)
+local function toggle_handler(attribute, what, allowed_during_cycle)
   return function(driver, device, command)
+    if not allowed_during_cycle and refuse_during_cycle(driver, device, what .. " change") then return end
     local value = command.args.value == "enabled" and "Enable" or "Disable"
     local washer, ok, err = washer_for(device), nil, "washer not found yet"
     if washer then ok, err = washer:control(attribute, value) end
@@ -440,7 +455,7 @@ local driver = Driver("samsung-washer-legacy", {
       [dispenserCap.commands.setAutoSoftener.NAME] = toggle_handler("WM_FUN_AUTO_SOFTENER", "auto softener"),
     },
     [childLockCap.ID] = {
-      [childLockCap.commands.setChildLock.NAME] = toggle_handler("WM_FUN_CHILD_LOCK", "child lock"),
+      [childLockCap.commands.setChildLock.NAME] = toggle_handler("WM_FUN_CHILD_LOCK", "child lock", true),
     },
     [capabilities.refresh.ID] = {
       [capabilities.refresh.commands.refresh.NAME] = refresh,

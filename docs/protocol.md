@@ -80,6 +80,10 @@ at once (`WM_FUN_PROGRESS=Wash`). The same remote start had worked instantly the
 the condition is not understood yet. Washing always shows a phase; `Start` without a phase means
 waiting.
 
+**Changes during a cycle.** The washer accepts `WM_FUN_COURSE_OPTION` writes while running (the
+rinse count was changed mid-cycle). The SmartThings driver refuses them, like the washer's own
+screen does, until the cycle is cancelled.
+
 `WM_FUN_OPERATION_PROGRESS` moves during a cycle (1 when stopped, then 4, 5…): probably the
 cycle's step; to be mapped on a full cycle.
 Not seen yet: the phase name at the very end of a cycle.
